@@ -1,6 +1,6 @@
-# 🏔️ CumbreApp - Sistema de Gestión de Préstamos.
+# CumbreApp - Sistema de Gestión de Préstamos.
 
-**CumbreApp** es una aplicación desarrollada en Java para la empresa **Cumbre Colombia**, orientada exclusivamente al control, inventario y seguimiento de préstamos de equipos de seguridad.
+**CumbreApp** es un proyecto que busca como finalidad producir una app desarrollada en Java para la empresa **Cumbre Colombia**, orientada exclusivamente al control, inventario y seguimiento de préstamos de equipos de seguridad.
 
 ---
 
@@ -27,4 +27,5 @@
 
 ## 📌 Estado del Proyecto
 
-En fase inicial de planeación, levantamiento de requerimientos y diseño del modelo de datos.
+Actualmente el proyecto se encuentra en su fase inicial, identificación de requerimientos y diseño/hipotesis del modelo de datos con los cuales se trabajará y asi mismo, como acoplarlos.
+

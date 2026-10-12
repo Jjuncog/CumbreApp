@@ -24,5 +24,4 @@ catalogo += "ID: " + producto4.getId() + " || Nombre: " + producto4.getNombre() 
 catalogo += "ID: " + producto5.getId() + " || Nombre: " + producto5.getNombre() + " || Precio " + producto5.getPrecio() + "\n";
 System.out.println(catalogo);
 }
-
 }

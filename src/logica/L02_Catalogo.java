@@ -17,11 +17,11 @@ producto5=new L01_Producto(1005,"Mosquetón de seguridad",14);
 
 public void mostrar_catalogo(){
 String catalogo="CATÁLOGO DE EQUIPO DE ALTURAS DISPONIBLE";
-catalogo+= "ID: " + producto1.getID() + " || Nombre: " + producto1.getNombre() + " || Precio " + producto1.getPrecio() + "\n";
-catalogo+= "ID: " + producto2.getID() + " || Nombre: " + producto2.getNombre() + " || Precio " + producto2.getPrecio() + "\n";
-catalogo+= "ID: " + producto3.getID() + " || Nombre: " + producto3.getNombre() + " || Precio " + producto3.getPrecio() + "\n";
-catalogo+= "ID: " + producto4.getID() + " || Nombre: " + producto4.getNombre() + " || Precio " + producto4.getPrecio() + "\n";
-catalogo+= "ID: " + producto5.getID() + " || Nombre: " + producto5.getNombre() + " || Precio " + producto5.getPrecio() + "\n";
+catalogo+= "ID: " + producto1.getId() + " || Nombre: " + producto1.getNombre() + " || Precio " + producto1.getPrecio() + "\n";
+catalogo+= "ID: " + producto2.getId() + " || Nombre: " + producto2.getNombre() + " || Precio " + producto2.getPrecio() + "\n";
+catalogo+= "ID: " + producto3.getId() + " || Nombre: " + producto3.getNombre() + " || Precio " + producto3.getPrecio() + "\n";
+catalogo+= "ID: " + producto4.getId() + " || Nombre: " + producto4.getNombre() + " || Precio " + producto4.getPrecio() + "\n";
+catalogo+= "ID: " + producto5.getId() + " || Nombre: " + producto5.getNombre() + " || Precio " + producto5.getPrecio() + "\n";
 }
 
 }

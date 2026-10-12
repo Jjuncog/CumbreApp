@@ -1,3 +1,6 @@
+package srcMain;
+import logica.*;
+import procdatos.*;
 
 public class Main {
 

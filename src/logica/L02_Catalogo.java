@@ -13,7 +13,11 @@ producto2=new L01_Producto(1002,"Línea de vida",10);
 producto3=new L01_Producto(1003,"Eslinga con absorbedor de energía",10);
 producto4=new L01_Producto(1004,"Retráctil anticaídas",10);
 producto5=new L01_Producto(1005,"Mosquetón de seguridad",10);
-
   }
+
+public void mostrar_catalogo(){
+String catalogo="CATÁLOGO DE EQUIPO DE ALTURAS DISPONIBLE";
+catalogo+= "ID" + 
+}
 
 }

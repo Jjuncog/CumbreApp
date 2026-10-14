@@ -8,11 +8,11 @@ private L01_Producto producto4;
 private L01_Producto producto5;
 
 public L02_Catalogo(){
-producto1=new L01_Producto(1001,"Arnés de seguridad",10);
-producto2=new L01_Producto(1002,"Línea de vida",11);
-producto3=new L01_Producto(1003,"Eslinga con absorbedor de energía",12);
-producto4=new L01_Producto(1004,"Retráctil anticaídas",13);
-producto5=new L01_Producto(1005,"Mosquetón de seguridad",14);
+producto1=new L01_Producto(1001,"Arnés de seguridad",255000);
+producto2=new L01_Producto(1002,"Línea de vida",200000);
+producto3=new L01_Producto(1003,"Eslinga con absorbedor de energía",345000);
+producto4=new L01_Producto(1004,"Retráctil anticaídas", 370000);
+producto5=new L01_Producto(1005,"Mosquetón de seguridad",189000);
   }
 
 public void mostrar_catalogo(){

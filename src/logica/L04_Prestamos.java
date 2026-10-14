@@ -1,5 +1,6 @@
-import java.time.LocalDate;
 package logica;
+import java.time.LocalDate;
+
 
 public class L04_Prestamos {
 
@@ -10,7 +11,7 @@ public class L04_Prestamos {
     private String productos;
     private Double valor_prestamo;
 
-    public LO4_Prestamos(int id_prestamo, int id_cliente, String productos, double valor_prestamo) {
+    public L04_Prestamos(int id_prestamo, int id_cliente, String productos, double valor_prestamo) {
         this.id_prestamo = id_prestamo;
         this.id_cliente = id_cliente;
         this.fecha_prestamo = LocalDate.now();

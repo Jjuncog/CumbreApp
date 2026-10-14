@@ -1,6 +1,5 @@
-package srcMain;
-import logica.*;
-import procdatos.*;
+package app;
+import models.*;
 
 public class Main {
 

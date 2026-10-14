@@ -1,11 +1,11 @@
 package srcMain;
-import logica.*;
-import procdatos.*;
-
+import logica.L04_pres;
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+
+
+
 
 	}
 

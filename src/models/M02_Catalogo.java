@@ -15,6 +15,23 @@ public class M02_Catalogo {
 		producto5=new M01_Producto(1005,"Mosquetón de seguridad",189000);
 	}
 
+	public M01_Producto buscarProductoPorId(int id) {
+    	if (producto1.getId() == id) return producto1;
+    	if (producto2.getId() == id) return producto2;
+    	if (producto3.getId() == id) return producto3;
+    	if (producto4.getId() == id) return producto4;
+    	if (producto5.getId() == id) return producto5;
+   		return null; // Retorna null si el ID del producto no existe
+	}
+
+	public int obtenerPrecioProducto(int id) {
+    	M01_Producto producto = buscarProductoPorId(id);
+    	if (producto != null) {
+        	return producto.getPrecio();
+    	}
+    	return -1; // Retorna -1 si el producto no se encuentra
+	}
+
 	public void mostrar_catalogo(){
 		String catalogo = "CATÁLOGO DE EQUIPO DE ALTURAS DISPONIBLE\n";
 		catalogo += "ID: " + producto1.getId() + " || Nombre: " + producto1.getNombre() + " || Precio: " + producto1.getPrecio() + "$\n";

@@ -15,7 +15,7 @@ public class M02_Catalogo {
 		producto5=new M01_Producto(1005,"Mosquetón de seguridad",189000);
 	}
 
-	public M01_Producto buscarProductoPorId(int id) {
+	public M01_Producto buscar_producto_por_id(int id) {
     	if (producto1.getId() == id) return producto1;
     	if (producto2.getId() == id) return producto2;
     	if (producto3.getId() == id) return producto3;
@@ -24,8 +24,8 @@ public class M02_Catalogo {
    		return null; // Retorna null si el ID del producto no existe
 	}
 
-	public int obtenerPrecioProducto(int id) {
-    	M01_Producto producto = buscarProductoPorId(id);
+	public int obtener_precio_producto(int id) {
+    	M01_Producto producto = buscar_producto_por_id(id);
     	if (producto != null) {
         	return producto.getPrecio();
     	}

@@ -14,11 +14,11 @@ public class M03_Inventario {
 	private int stock1005;
 
 	public M03_Inventario() {
-		stock1001 = 20;
-		stock1002 = 15;
-		stock1003 = 12;
-		stock1004 = 8;
-		stock1005 = 30;
+		stock1001 = 60;
+		stock1002 = 55;
+		stock1003 = 62;
+		stock1004 = 51;
+		stock1005 = 63;
 	}
 
 	public M03_Inventario(int s1001, int s1002, int s1003, int s1004, int s1005) {

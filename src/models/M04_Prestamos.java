@@ -18,7 +18,7 @@ public class M04_Prestamos {
     private boolean mora_prestamo;
     private static int contador_prestamos = 0;
 
-    private static double gananciasTotalesPrestamos = 0.0;
+    private static double ganancias_totales_prestamos = 0.0;
 
 
     private double valor_total_prestamo(int id_producto, int dias_prestamo){
@@ -52,7 +52,7 @@ public class M04_Prestamos {
         estado_prestamo = true;
         mora_prestamo = false;
 
-        gananciasTotalesPrestamos += valor_prestamo;
+        ganancias_totales_prestamos += valor_prestamo;
         contador_prestamos++;
     }
 
@@ -127,7 +127,7 @@ public class M04_Prestamos {
         return contador_prestamos;
     }
     public static double get_ganancias_totales_prestamos() {
-        return gananciasTotalesPrestamos;
+        return ganancias_totales_prestamos;
     }
 
     // NO se agregan setters ya que al modificarse una variable del objeto puede afectar la trasabilidad del codigo y tener problemas con una futura base de datos

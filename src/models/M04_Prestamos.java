@@ -16,8 +16,10 @@ public class M04_Prestamos {
     private double valor_prestamo;
     private boolean estado_prestamo;
     private boolean mora_prestamo;
+    private static int contador_prestamos = 0;
 
     private static double gananciasTotalesPrestamos = 0.0;
+
 
     private double valor_total_prestamo(int id_producto, int dias_prestamo){
         M02_Catalogo catalogo = new M02_Catalogo();
@@ -51,6 +53,7 @@ public class M04_Prestamos {
         mora_prestamo = false;
 
         gananciasTotalesPrestamos += valor_prestamo;
+        contador_prestamos++;
     }
 
 
@@ -120,7 +123,9 @@ public class M04_Prestamos {
     public boolean get_mora_prestamo() {
         return mora_prestamo;
     }
-
+    public static int getContadorPrestamos() {
+        return contador_prestamos;
+    }
     public double getGananciasTotalesPrestamos() {
         return gananciasTotalesPrestamos;
     }

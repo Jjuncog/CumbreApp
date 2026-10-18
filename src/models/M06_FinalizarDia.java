@@ -11,18 +11,22 @@ public class M06_FinalizarDia {
         this.sc = sc;
     }
 
-    public void finalizar_dia(M05_Ventas ventas) {
+    public void finalizar_dia(M05_Ventas ventas, M04_Prestamos prestamos) {
 
         LocalDate fecha = LocalDate.now();
         long gananciasAcumuladas = ventas.getGananciasAcumuladas();
         int movimientos = ventas.getCantidadMovimientos();
+        double gananciasPrestamos = prestamos.getGananciasTotalesPrestamos();
+        double contadorPrestamos = prestamos.get_contador_prestamos();
 
         System.out.println("\n==================================");
         System.out.println("          CIERRE DEL DIA");
         System.out.println("==================================");
         System.out.println("Fecha: " + fecha);
-        System.out.println("Ganancias acumuladas: $" + gananciasAcumuladas);
-        System.out.println("Movimientos registrados: " + movimientos);
+        System.out.println("Ganancias por ventas: $" + gananciasAcumuladas);
+        System.out.println("Ventas registradas: " + movimientos);
+        System.out.println("Ganancias por préstamos: $" + gananciasPrestamos);
+        System.out.println("Préstamos registrados: " + contadorPrestamos);
         System.out.println("==================================");
 
         System.out.print("¿Desea cerrar el programa? 1=Si 0=No: ");

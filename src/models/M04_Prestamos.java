@@ -17,6 +17,8 @@ public class M04_Prestamos {
     private boolean estado_prestamo;
     private boolean mora_prestamo;
 
+    public static double gananciasTotalesPrestamos = 0.0;
+
     private double valor_total_prestamo(int id_producto, int dias_prestamo){
         M02_Catalogo catalogo = new M02_Catalogo();
         int valor_producto = catalogo.obtener_precio_producto(id_producto);
@@ -47,7 +49,10 @@ public class M04_Prestamos {
 
         estado_prestamo = true;
         mora_prestamo = false;
+
+        gananciasTotalesPrestamos += valor_prestamo;
     }
+
 
     // estado del prestamo
     private String estado(boolean estado_prestamo){
@@ -114,6 +119,10 @@ public class M04_Prestamos {
     }
     public boolean get_mora_prestamo() {
         return mora_prestamo;
+    }
+
+    public double getGananciasTotalesPrestamos() {
+        return gananciasTotalesPrestamos;
     }
 
 

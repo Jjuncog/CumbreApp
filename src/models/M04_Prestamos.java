@@ -120,7 +120,6 @@ public class M04_Prestamos {
     public boolean get_mora_prestamo() {
         return mora_prestamo;
     }
-
     public double getGananciasTotalesPrestamos() {
         return gananciasTotalesPrestamos;
     }

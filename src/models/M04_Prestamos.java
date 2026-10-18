@@ -16,8 +16,8 @@ public class M04_Prestamos {
     private double valor_prestamo;
     private boolean estado_prestamo;
     private boolean mora_prestamo;
+    
     private static int contador_prestamos = 0;
-
     private static double ganancias_totales_prestamos = 0.0;
 
 

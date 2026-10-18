@@ -123,13 +123,12 @@ public class M04_Prestamos {
     public boolean get_mora_prestamo() {
         return mora_prestamo;
     }
-    public static int getContadorPrestamos() {
+    public static int get_contador_prestamos() {
         return contador_prestamos;
     }
-    public double getGananciasTotalesPrestamos() {
+    public static double get_ganancias_totales_prestamos() {
         return gananciasTotalesPrestamos;
     }
-
 
     // NO se agregan setters ya que al modificarse una variable del objeto puede afectar la trasabilidad del codigo y tener problemas con una futura base de datos
 

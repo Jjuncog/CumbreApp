@@ -4,7 +4,7 @@ Este repositorio contiene el código fuente de **CumbreApp**, un aplicativo desa
 
 ---
 
-## 🎯 Alcance del Proyecto
+## Alcance del Proyecto
 
 - **Gestión de Inventario:** Control de disponibilidad, estado y actualización de existencias de los equipos de seguridad en tiempo real.
 - **Control de Préstamos:** Registro de asignación de elementos a clientes, gestionando tiempos de entrega y validación de stock.
@@ -12,7 +12,7 @@ Este repositorio contiene el código fuente de **CumbreApp**, un aplicativo desa
 
 ---
 
-## 👥 Integrantes del Grupo
+## Integrantes del Grupo
 
 | Nombre Completo | Documento | Correo Electrónico |
 |-----------------|-----------|--------------------|
@@ -25,13 +25,13 @@ Este repositorio contiene el código fuente de **CumbreApp**, un aplicativo desa
 
 ---
 
-## 📌 Estado del Proyecto
+## Estado del Proyecto
 
 El proyecto ha completado satisfactoriamente su **Entrega 1**. Durante esta fase, se estructuró el modelo organizando el código en los paquetes `app` y `models`, con el fin de establecer una estructura MVC en futuras entregas. Actualmente, se dispone de un prototipo funcional en consola que permite gestionar el catálogo, verificar el inventario, realizar ventas, registrar préstamos y generar el balance de cierre de jornada.
 
 ---
 
-## 🚀 Instrucciones de Ejecución
+## Instrucciones de Ejecución
 
 La interfaz de la aplicación se ejecuta íntegramente a través de la consola.
 

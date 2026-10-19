@@ -1,4 +1,4 @@
-# CumbreApp - Sistema de Gestión de Préstamos
+# CumbreApp - Sistema de Gestión
 
 Este repositorio contiene el código fuente de **CumbreApp**, un aplicativo desarrollado en Java para la empresa **Cumbre Colombia**. El sistema está diseñado para optimizar el control, inventario y seguimiento de los préstamos y ventas de equipos de seguridad para trabajo en alturas.
 

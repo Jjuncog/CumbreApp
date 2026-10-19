@@ -16,7 +16,7 @@ public class M06_FinalizarDia {
         LocalDate fecha = LocalDate.now();
         long gananciasAcumuladas = ventas.getGananciasAcumuladas();
         int movimientos = ventas.getCantidadMovimientos();
-        double gananciasPrestamos = prestamos.getGananciasTotalesPrestamos();
+        double gananciasPrestamos = prestamos.get_ganancias_totales_prestamos();
         double contadorPrestamos = prestamos.get_contador_prestamos();
 
         System.out.println("\n==================================");

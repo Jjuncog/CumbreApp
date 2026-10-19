@@ -26,11 +26,16 @@ public class M05_Ventas {
         int opcion;
 
         do {
+        	System.out.println("\n====================================");
+   	     	System.out.println("          MENÚ DE VENTAS");
+   	     	System.out.println("====================================");
             System.out.println(
-                    "1. Añadir venta nueva del día.\n" +
-                            "2. Registrar corrección o devolución.\n" +
-                            "3. Consultar historial.\n" +
-                            "4. Volver al menú principal.\n");
+            				   "Seleccione una opcion:\n" +
+            				   "\n1. Añadir venta nueva del día.\n" +
+                               "2. Registrar corrección o devolución.\n" +
+                               "3. Consultar historial.\n" +
+                               "4. Volver al menú principal.\n");
+            System.out.println("====================================");
 
             opcion = sc.nextInt();
 

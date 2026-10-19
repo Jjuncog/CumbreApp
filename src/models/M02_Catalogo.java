@@ -31,6 +31,7 @@ public class M02_Catalogo {
     	}
     	return -1; // Retorna -1 si el producto no se encuentra
 	}
+	
 
 	public void mostrar_catalogo(){
 		String catalogo = "CATÁLOGO DE EQUIPO DE ALTURAS DISPONIBLE\n";

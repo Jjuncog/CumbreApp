@@ -1,9 +1,11 @@
 package models;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.Scanner;
 
 public class M04_Prestamos {
-
+	
+	private Scanner sc;
     private int id_prestamo;
     private int id_cliente;
     private String nombre_cliente;
@@ -32,12 +34,15 @@ public class M04_Prestamos {
         }
         // A futuro se espera agregar una nueva regla de negocio que agrege un costo por mora en la entrega de proctos
     }
+    
+    public M04_Prestamos() {}
 
     M03_Inventario inventario = new M03_Inventario();
 
     // Registro de prestamos
-    public M04_Prestamos(int id_prestamo, int id_cliente, String nombre_cliente, String contacto_cliente, LocalDate fecha_prestamo, int dias_prestamo, int id_producto, int cantidad_producto){
-        this.id_prestamo = id_prestamo;
+    public M04_Prestamos( int id_cliente, String nombre_cliente, String contacto_cliente, LocalDate fecha_prestamo, int dias_prestamo, int id_producto, int cantidad_producto){
+        contador_prestamos++;
+    	this.id_prestamo = contador_prestamos;
         this.id_cliente = id_cliente;
         this.nombre_cliente = nombre_cliente;
         this.contacto_cliente = contacto_cliente;
@@ -52,8 +57,7 @@ public class M04_Prestamos {
         estado_prestamo = true;
         mora_prestamo = false;
 
-        ganancias_totales_prestamos += valor_prestamo;
-        contador_prestamos++;
+        ganancias_totales_prestamos+= valor_prestamo;
     }
 
 
@@ -70,12 +74,77 @@ public class M04_Prestamos {
             return "En mora";
         }
     }
-
-
-    public void devolucion_prestamo(){
-        estado_prestamo = false;
-        inventario.aumentar_stock(id_producto, cantidad_producto);
+    
+    public void mostrarMenuPrestamos() {
+    	int op;
+    	sc = new Scanner(System.in);
+    	do {
+    		System.out.println("\n====================================");
+   	     	System.out.println("          MENÚ DE PRÉSTAMOS");
+   	     	System.out.println("====================================");
+    		System.out.println(
+            				   "Seleccione una opción para continuar\n" +
+            				   "\n1. Añadir un préstamo\n" +
+            				   "2. Registrar devolución de equipo\n" +
+                    		   "3. Volver al menú principal\n ");
+    		
+    		System.out.println("====================================");
+    		
+    		op = sc.nextInt();
+    		switch(op) {
+    		case 1: 
+    	        System.out.println("Ingrese el ID del cliente:");
+    	        int id_cliente = sc.nextInt();
+    	        
+    	        System.out.println("Ingrese el nombre del cliente:");
+    	        sc.nextLine(); // Limpiar el enter
+    	        String nombre_cliente = sc.nextLine();
+    	        
+    	        System.out.println("Ingrese el contacto (correo) del cliente:");
+    	        String contacto_cliente = sc.nextLine();
+    	        
+    	        System.out.println("Ingrese los días de préstamo:");
+    	        int dias_prestamo = sc.nextInt();
+    	        
+    	        System.out.println("Ingrese la ID del producto:");
+    	        int id_producto = sc.nextInt();
+    	        
+    	        System.out.println("Ingrese la cantidad del producto:");
+    	        int cantidad_producto = sc.nextInt();
+    	        
+    	        M04_Prestamos nuevo = new M04_Prestamos(
+    	            id_cliente, nombre_cliente, contacto_cliente, 
+    	            LocalDate.now(), dias_prestamo, id_producto, cantidad_producto
+    	        );
+    	        
+    	        System.out.println("¡Préstamo registrado exitosamente!\n");
+    	        System.out.println(nuevo.consultar_prestamo());
+    	        break; 
+    	        
+    		case 2:
+    	        
+    	        System.out.println("Ingrese la ID del producto a devolver:");
+    	        int id_prod_dev = sc.nextInt();
+    	        
+    	        System.out.println("Ingrese la cantidad a devolver:");
+    	        int cant_prod = sc.nextInt();
+    	        
+    	        inventario.aumentar_stock(id_prod_dev, cant_prod);
+    	        System.out.println("Devolución exitosa. Se regresó la cantidad al inventario.\n");
+    	        estado_prestamo = false;
+    	        break;
+    			
+    		case 3:
+    			System.out.println("Regresando al menú...\n");
+    			break;
+    			
+    		default:
+    			System.out.println("Opción inválida. Ingrese una nueva opción.\n");
+    		} 
+    	
+    		} while(op!=3);
     }
+    		
 
     public String consultar_prestamo(){
         return  "---------------------------------" + "\n" +

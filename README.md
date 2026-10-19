@@ -42,7 +42,7 @@ La interfaz de la aplicación se ejecuta íntegramente a través de la consola.
 ### Opción 1: Ejecución desde un Entorno de Desarrollo (IDE - Recomendado)
 1. Clone el repositorio en su entorno local ejecutando el siguiente comando:
    ```bash
-   git clone <URL_DEL_REPOSITORIO>
+   git clone <https://github.com/Jjuncog/CumbreApp>
    ```
 2. Abra el directorio del proyecto en su editor de código (por ejemplo, Visual Studio Code con el *Extension Pack for Java*, o Eclipse).
 3. En el explorador de archivos del proyecto, diríjase a la ruta `src/app/` y abra el archivo `Main.java`.

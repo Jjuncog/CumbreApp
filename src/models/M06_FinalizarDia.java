@@ -17,7 +17,7 @@ public class M06_FinalizarDia {
         long gananciasAcumuladas = ventas.getGananciasAcumuladas();
         int movimientos = ventas.getCantidadMovimientos();
         double gananciasPrestamos = prestamos.get_ganancias_totales_prestamos();
-        double contadorPrestamos = prestamos.get_contador_prestamos();
+        int contadorPrestamos = prestamos.get_contador_prestamos();
 
         System.out.println("\n==================================");
         System.out.println("          CIERRE DEL DIA");

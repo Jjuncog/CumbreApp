@@ -8,7 +8,7 @@ public class Main {
 	Scanner sc = new Scanner(System.in);
 	M02_Catalogo catalogo = new M02_Catalogo();
 	M03_Inventario inventario = new M03_Inventario();
-	M04_Prestamos prestamos = new M04_Prestamos();
+	M04_Prestamos prestamos = new M04_Prestamos(inventario);
 	M05_Ventas ventas = new M05_Ventas(catalogo, inventario, sc);
 	M06_FinalizarDia finalizar = new M06_FinalizarDia(sc);
 	
@@ -20,7 +20,6 @@ public class Main {
 	     System.out.println("           MENÚ PRINCIPAL");
 	     System.out.println("=====================================");
 	     System.out.println(
-        		
 	    		 			"Seleccione una opción para continuar:\n" +
 	    		 			"\n1. Consultar el catálogo disponible.\n" +
 	    		 			"2. Consultar inventario de productos.\n" +
@@ -47,6 +46,7 @@ public class Main {
                 break;
             case 5:
             	finalizar.finalizar_dia(ventas, prestamos);
+                break;
             default:
             	System.out.println("Opción inválida, ingrese de nuevo");
                 
@@ -57,4 +57,3 @@ public class Main {
  }
 
 }
-

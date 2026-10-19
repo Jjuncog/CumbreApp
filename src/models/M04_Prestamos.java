@@ -21,7 +21,8 @@ public class M04_Prestamos {
     
     private static int contador_prestamos = 0;
     private static double ganancias_totales_prestamos = 0.0;
-
+    
+    private M03_Inventario inventario;
 
     private double valor_total_prestamo(int id_producto, int dias_prestamo){
         M02_Catalogo catalogo = new M02_Catalogo();
@@ -32,24 +33,23 @@ public class M04_Prestamos {
         else{
             return 0;
         }
-        // A futuro se espera agregar una nueva regla de negocio que agrege un costo por mora en la entrega de proctos
     }
     
-    public M04_Prestamos() {}
+    public M04_Prestamos(M03_Inventario inventario) {
+        this.inventario = inventario;
+    }
 
-    M03_Inventario inventario = new M03_Inventario();
-
-    // Registro de prestamos
-    public M04_Prestamos( int id_cliente, String nombre_cliente, String contacto_cliente, LocalDate fecha_prestamo, int dias_prestamo, int id_producto, int cantidad_producto){
+    public M04_Prestamos( int id_cliente, String nombre_cliente, String contacto_cliente, LocalDate fecha_prestamo, int dias_prestamo, int id_producto, int cantidad_producto, M03_Inventario inventario){
+        this.inventario = inventario;
         contador_prestamos++;
     	this.id_prestamo = contador_prestamos;
         this.id_cliente = id_cliente;
         this.nombre_cliente = nombre_cliente;
         this.contacto_cliente = contacto_cliente;
         this.fecha_prestamo = fecha_prestamo;
-        fecha_devolucion = fecha_prestamo.plusDays(dias_prestamo); // Se asignan 30 dias para la entrega, este valor esa sujeto a combios futuros
+        fecha_devolucion = fecha_prestamo.plusDays(dias_prestamo); 
 
-        inventario.descontar_stock(id_producto, cantidad_producto);
+        this.inventario.descontar_stock(id_producto, cantidad_producto);
 
         this.id_producto = id_producto;
         valor_prestamo = valor_total_prestamo(id_producto, dias_prestamo);
@@ -60,8 +60,6 @@ public class M04_Prestamos {
         ganancias_totales_prestamos+= valor_prestamo;
     }
 
-
-    // estado del prestamo
     private String estado(boolean estado_prestamo){
         if(LocalDate.now().isBefore(fecha_devolucion)){
             if(estado_prestamo == true){
@@ -97,7 +95,7 @@ public class M04_Prestamos {
     	        int id_cliente = sc.nextInt();
     	        
     	        System.out.println("Ingrese el nombre del cliente:");
-    	        sc.nextLine(); // Limpiar el enter
+    	        sc.nextLine(); 
     	        String nombre_cliente = sc.nextLine();
     	        
     	        System.out.println("Ingrese el contacto (correo) del cliente:");
@@ -114,7 +112,7 @@ public class M04_Prestamos {
     	        
     	        M04_Prestamos nuevo = new M04_Prestamos(
     	            id_cliente, nombre_cliente, contacto_cliente, 
-    	            LocalDate.now(), dias_prestamo, id_producto, cantidad_producto
+    	            LocalDate.now(), dias_prestamo, id_producto, cantidad_producto, inventario
     	        );
     	        
     	        System.out.println("¡Préstamo registrado exitosamente!\n");
@@ -122,7 +120,6 @@ public class M04_Prestamos {
     	        break; 
     	        
     		case 2:
-    	        
     	        System.out.println("Ingrese la ID del producto a devolver:");
     	        int id_prod_dev = sc.nextInt();
     	        
@@ -145,7 +142,6 @@ public class M04_Prestamos {
     		} while(op!=3);
     }
     		
-
     public String consultar_prestamo(){
         return  "---------------------------------" + "\n" +
                 "PRESTAMO " +id_prestamo+ "\n" +
@@ -161,7 +157,6 @@ public class M04_Prestamos {
 
     }
 
-    // Getters
     public int get_id_prestamo() {
         return id_prestamo;
     }
@@ -198,10 +193,5 @@ public class M04_Prestamos {
     public static double get_ganancias_totales_prestamos() {
         return ganancias_totales_prestamos;
     }
-
-    // NO se agregan setters ya que al modificarse una variable del objeto puede afectar la trasabilidad del codigo y tener problemas con una futura base de datos
-
-
-
 
 }

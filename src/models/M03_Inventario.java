@@ -86,12 +86,15 @@ public class M03_Inventario {
 	}
 
 	public void mostrar_inventario() {
-		String inventario = "INVENTARIO ACTUAL DE EQUIPO DE ALTURAS\n";
-		inventario += "ID: 1001 || Unidades disponibles: " + stock1001 + "\n";
-		inventario += "ID: 1002 || Unidades disponibles: " + stock1002 + "\n";
-		inventario += "ID: 1003 || Unidades disponibles: " + stock1003 + "\n";
-		inventario += "ID: 1004 || Unidades disponibles: " + stock1004 + "\n";
-		inventario += "ID: 1005 || Unidades disponibles: " + stock1005 + "\n";
+		String inventario = "\n=====================================\n";
+		inventario += "    INVENTARIO ACTUAL DE EQUIPOS\n";
+		inventario += "=====================================\n";
+		inventario += "ID: 1001 | Unidades disponibles: " + stock1001 + "\n";
+		inventario += "ID: 1002 | Unidades disponibles: " + stock1002 + "\n";
+		inventario += "ID: 1003 | Unidades disponibles: " + stock1003 + "\n";
+		inventario += "ID: 1004 | Unidades disponibles: " + stock1004 + "\n";
+		inventario += "ID: 1005 | Unidades disponibles: " + stock1005 + "\n";
+		inventario += "=====================================";
 		System.out.println(inventario);
 	}
 

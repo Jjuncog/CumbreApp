@@ -1,4 +1,3 @@
-
 package models;
 
 import java.util.Scanner;
@@ -26,16 +25,16 @@ public class M05_Ventas {
         int opcion;
 
         do {
-        	System.out.println("\n====================================");
-   	     	System.out.println("          MENÚ DE VENTAS");
-   	     	System.out.println("====================================");
+        	System.out.println("\n=====================================");
+   	     	System.out.println("           MENÚ DE VENTAS");
+   	     	System.out.println("=====================================");
             System.out.println(
-            				   "Seleccione una opcion:\n" +
+            				   "Seleccione una opción:\n" +
             				   "\n1. Añadir venta nueva del día.\n" +
                                "2. Registrar corrección o devolución.\n" +
                                "3. Consultar historial.\n" +
                                "4. Volver al menú principal.\n");
-            System.out.println("====================================");
+            System.out.println("=====================================");
 
             opcion = sc.nextInt();
 
@@ -50,7 +49,7 @@ public class M05_Ventas {
                     consultarHistorial();
                     break;
                 case 4:
-                    System.out.println("Sistema de venta finalizado");
+                    System.out.println("Regresando al menú principal...\n");
                     break;
                 default:
                     System.out.println("Opción inválida");
@@ -60,11 +59,8 @@ public class M05_Ventas {
 
     // Registrar venta
     public void registrarVenta() {
-        int idProducto;
-        int cantidad;
-        int precioUnitario;
+        int idProducto, cantidad, precioUnitario, salida;
         long valorVenta;
-        int salida;
         M01_Producto producto;
 
         do {
@@ -104,24 +100,19 @@ public class M05_Ventas {
                     + " | Cantidad: " + cantidad
                     + " | Total: $" + valorVenta + "\n";
 
-            System.out.println("Venta: " + cantidad + " "
-                    + producto.getNombre() + " -> $" + valorVenta);
+            System.out.println("\nVenta Registrada Exitosamente.");
+            System.out.println("Resumen: " + cantidad + "x " + producto.getNombre() + " -> $" + valorVenta);
 
-            System.out.print("¿Terminó el registro? 1=Si 0=No -> ");
+            System.out.print("\n¿Desea registrar otro producto? 1=Sí, 0=Volver al menú de ventas: ");
             salida = sc.nextInt();
 
-            System.out.println("Registro exitoso");
-
-        } while (salida != 1);
+        } while (salida == 1);
     }
 
     // Registrar corrección o devolución
     private void registrarCorrecion() {
-        int idProducto;
-        int cantidad;
-        int precioUnitario;
+        int idProducto, cantidad, precioUnitario, salida;
         long valorCorrecion;
-        int salida;
         M01_Producto producto;
 
         do {
@@ -156,30 +147,34 @@ public class M05_Ventas {
 
             gananciasAcumuladas -= valorCorrecion;
 
-            historial += "CORRECCION | ID: " + idProducto
+            historial += "CORRECCIÓN | ID: " + idProducto
                     + " | Producto: " + producto.getNombre()
                     + " | Cantidad: " + cantidad
-                    + " | Valor corrección: $" + valorCorrecion + "\n";
+                    + " | Valor corrección: -$" + valorCorrecion + "\n";
 
-            System.out.println("Corrección: " + cantidad + " "
-                    + producto.getNombre() + " -> $" + valorCorrecion);
+            System.out.println("\n¡Corrección Registrada Exitosamente!");
+            System.out.println("Resumen: Se regresaron " + cantidad + "x " + producto.getNombre() + " -> -$" + valorCorrecion);
 
-            System.out.print("¿Terminó el registro? 1=Si 0=No -> ");
+            System.out.print("\n¿Desea registrar otra corrección? 1=Sí, 0=Volver al menú de ventas: ");
             salida = sc.nextInt();
 
-            System.out.println("Registro exitoso");
-
-        } while (salida != 1);
+        } while (salida == 1);
     }
 
     // Consultar historial
     private void consultarHistorial() {
+    	System.out.println("\n==========================================================================================");
+	    System.out.println("                                    HISTORIAL DE VENTAS");
+	    System.out.println("==========================================================================================");
         if (historial.isEmpty()) {
-            System.out.println("No se han registrado ventas");
-            return;
+            System.out.println("No se han registrado ventas.");
+        } else {
+            System.out.print(historial);
         }
-
-        System.out.println(historial);
+        System.out.println("==========================================================================================");
+        
+        System.out.print("\nPresione 1 para volver al menú de ventas: ");
+        sc.nextInt();
     }
 
     // Consultar ganancias acumuladas
@@ -192,7 +187,6 @@ public class M05_Ventas {
         if (historial.isEmpty()) {
             return 0;
         }
-
         return historial.split("\n").length;
     }
 }

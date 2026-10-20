@@ -10,7 +10,7 @@ public class M02_Catalogo {
 	public M02_Catalogo(){
 		producto1=new M01_Producto(1001,"Arnés de seguridad",255000);
 		producto2=new M01_Producto(1002,"Línea de vida",200000);
-		producto3=new M01_Producto(1003,"Eslinga con absorbedor de energía",345000);
+		producto3=new M01_Producto(1003,"Eslinga con absorbedor",345000); // Acortado levemente para formato
 		producto4=new M01_Producto(1004,"Retráctil anticaídas",370000);
 		producto5=new M01_Producto(1005,"Mosquetón de seguridad",189000);
 	}
@@ -34,12 +34,15 @@ public class M02_Catalogo {
 	
 
 	public void mostrar_catalogo(){
-		String catalogo = "CATÁLOGO DE EQUIPO DE ALTURAS DISPONIBLE\n";
-		catalogo += "ID: " + producto1.getId() + " || Nombre: " + producto1.getNombre() + " || Precio: " + producto1.getPrecio() + "$\n";
-		catalogo += "ID: " + producto2.getId() + " || Nombre: " + producto2.getNombre() + " || Precio: " + producto2.getPrecio() + "$\n";
-		catalogo += "ID: " + producto3.getId() + " || Nombre: " + producto3.getNombre() + " || Precio: " + producto3.getPrecio() + "$\n";
-		catalogo += "ID: " + producto4.getId() + " || Nombre: " + producto4.getNombre() + " || Precio: " + producto4.getPrecio() + "$\n";
-		catalogo += "ID: " + producto5.getId() + " || Nombre: " + producto5.getNombre() + " || Precio: " + producto5.getPrecio() + "$\n";
+		String catalogo = "\n============================================\n";
+		catalogo += "       CATÁLOGO DE EQUIPOS DISPONIBLE\n";
+		catalogo += "============================================\n";
+		catalogo += "ID: " + producto1.getId() + " | " + producto1.getNombre() + " | $" + producto1.getPrecio() + "\n";
+		catalogo += "ID: " + producto2.getId() + " | " + producto2.getNombre() + " | $" + producto2.getPrecio() + "\n";
+		catalogo += "ID: " + producto3.getId() + " | " + producto3.getNombre() + " | $" + producto3.getPrecio() + "\n";
+		catalogo += "ID: " + producto4.getId() + " | " + producto4.getNombre() + " | $" + producto4.getPrecio() + "\n";
+		catalogo += "ID: " + producto5.getId() + " | " + producto5.getNombre() + " | $" + producto5.getPrecio() + "\n";
+		catalogo += "============================================";
 		System.out.println(catalogo);
 	}
 

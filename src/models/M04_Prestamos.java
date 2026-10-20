@@ -19,6 +19,7 @@ public class M04_Prestamos {
     private boolean estado_prestamo;
     private boolean mora_prestamo;
     
+    
     private static int contador_prestamos = 0;
     private static double ganancias_totales_prestamos = 0.0;
     
@@ -33,26 +34,31 @@ public class M04_Prestamos {
         else{
             return 0;
         }
+        // A futuro se espera agregar una nueva regla de negocio que agrege un costo por mora en la entrega de proctos
     }
     
+    public M04_Prestamos() {}
+
     public M04_Prestamos(M03_Inventario inventario) {
         this.inventario = inventario;
     }
 
+    // Registro de prestamos
     public M04_Prestamos( int id_cliente, String nombre_cliente, String contacto_cliente, LocalDate fecha_prestamo, int dias_prestamo, int id_producto, int cantidad_producto, M03_Inventario inventario){
-        this.inventario = inventario;
+    	this.cantidad_producto = cantidad_producto;
+    	this.inventario = inventario;
         contador_prestamos++;
     	this.id_prestamo = contador_prestamos;
         this.id_cliente = id_cliente;
         this.nombre_cliente = nombre_cliente;
         this.contacto_cliente = contacto_cliente;
         this.fecha_prestamo = fecha_prestamo;
-        fecha_devolucion = fecha_prestamo.plusDays(dias_prestamo); 
+        fecha_devolucion = fecha_prestamo.plusDays(dias_prestamo); // Se asignan 30 dias para la entrega, este valor esa sujeto a combios futuros
 
         this.inventario.descontar_stock(id_producto, cantidad_producto);
 
         this.id_producto = id_producto;
-        valor_prestamo = valor_total_prestamo(id_producto, dias_prestamo);
+        valor_prestamo = valor_total_prestamo(id_producto, dias_prestamo)*cantidad_producto;
 
         estado_prestamo = true;
         mora_prestamo = false;
@@ -60,12 +66,13 @@ public class M04_Prestamos {
         ganancias_totales_prestamos+= valor_prestamo;
     }
 
+    // estado del prestamo
     private String estado(boolean estado_prestamo){
         if(LocalDate.now().isBefore(fecha_devolucion)){
             if(estado_prestamo == true){
-                return "activo";
+                return "Activo";
             }
-            else return "devuelto";
+            else return "Devuelto";
         }
         else {
             mora_prestamo = true;
@@ -77,16 +84,16 @@ public class M04_Prestamos {
     	int op;
     	sc = new Scanner(System.in);
     	do {
-    		System.out.println("\n====================================");
+    		System.out.println("\n=====================================");
    	     	System.out.println("          MENÚ DE PRÉSTAMOS");
-   	     	System.out.println("====================================");
+   	     	System.out.println("=====================================");
     		System.out.println(
-            				   "Seleccione una opción para continuar\n" +
+            				   "Seleccione una opción para continuar:\n" +
             				   "\n1. Añadir un préstamo\n" +
             				   "2. Registrar devolución de equipo\n" +
-                    		   "3. Volver al menú principal\n ");
+                    		   "3. Volver al menú principal\n");
     		
-    		System.out.println("====================================");
+    		System.out.println("=====================================");
     		
     		op = sc.nextInt();
     		switch(op) {
@@ -95,7 +102,7 @@ public class M04_Prestamos {
     	        int id_cliente = sc.nextInt();
     	        
     	        System.out.println("Ingrese el nombre del cliente:");
-    	        sc.nextLine(); 
+    	        sc.nextLine(); // Limpiar el enter
     	        String nombre_cliente = sc.nextLine();
     	        
     	        System.out.println("Ingrese el contacto (correo) del cliente:");
@@ -115,8 +122,11 @@ public class M04_Prestamos {
     	            LocalDate.now(), dias_prestamo, id_producto, cantidad_producto, inventario
     	        );
     	        
-    	        System.out.println("¡Préstamo registrado exitosamente!\n");
+    	        System.out.println("\n¡Préstamo registrado exitosamente!");
     	        System.out.println(nuevo.consultar_prestamo());
+    	        
+    	        System.out.print("\n¿Desea realizar otro préstamo? 1=Sí, 0=Volver al menú principal: ");
+    	        if (sc.nextInt() == 0) op = 3;
     	        break; 
     	        
     		case 2:
@@ -127,12 +137,15 @@ public class M04_Prestamos {
     	        int cant_prod = sc.nextInt();
     	        
     	        inventario.aumentar_stock(id_prod_dev, cant_prod);
-    	        System.out.println("Devolución exitosa. Se regresó la cantidad al inventario.\n");
+    	        System.out.println("Devolución exitosa. Se regresó la cantidad al inventario.");
     	        estado_prestamo = false;
+    	        
+    	        System.out.print("\n¿Desea realizar otra devolución? 1=Sí, 0=Volver al menú principal: ");
+    	        if (sc.nextInt() == 0) op = 3;
     	        break;
     			
     		case 3:
-    			System.out.println("Regresando al menú...\n");
+    			System.out.println("Regresando al menú principal...\n");
     			break;
     			
     		default:
@@ -143,55 +156,38 @@ public class M04_Prestamos {
     }
     		
     public String consultar_prestamo(){
-        return  "---------------------------------" + "\n" +
-                "PRESTAMO " +id_prestamo+ "\n" +
-                "---------------------------------" + "\n" +
+    	M02_Catalogo catalogoAux = new M02_Catalogo();
+    	M01_Producto prod = catalogoAux.buscar_producto_por_id(id_producto);
+    	String nombreProd = (prod != null) ? prod.getNombre() : "Producto Desconocido";
+    	
+        return  "\n=================================================\n" +
+                "                  PRÉSTAMO " +id_prestamo+ "\n" +
+                "=================================================\n" +
                 "Id del Cliente: "+ id_cliente + "\n" +
-                "Fecha del prestamo: " + fecha_prestamo + "\n" +
-                "Fecha limite de devolucion: " + fecha_devolucion + "\n" +
-                "Producto(s): " + id_producto + "\n" +
-                "estado_prestamo: " + estado(estado_prestamo) + "\n" +
-                "---------------------------------" + "\n" +
-                "Valor prestamo :" + valor_prestamo + "\n" +
-                "---------------------------------";
-
+                "Fecha del préstamo: " + fecha_prestamo + "\n" +
+                "Fecha límite devolución: " + fecha_devolucion + "\n" +
+                "Producto: " + nombreProd + " (ID: " + id_producto + ")\n" +
+                "Cantidad: " + cantidad_producto + "\n" +
+                "Estado préstamo: " + estado(estado_prestamo) + "\n" +
+                "=================================================\n" +
+                "Valor total préstamo: $" + valor_prestamo + "\n" +
+                "=================================================";
     }
 
-    public int get_id_prestamo() {
-        return id_prestamo;
-    }
-    public int get_id_cliente() {
-        return id_cliente;
-    }
-    public String get_nombre_cliente() {
-        return nombre_cliente;
-    }
-    public String get_contacto_nombre() {
-        return contacto_cliente;
-    }
-    public LocalDate get_fecha_prestamo() {
-        return fecha_prestamo;
-    }
-    public LocalDate get_fecha_devolucion() {
-        return fecha_devolucion;
-    }
-    public int get_id_producto() {
-        return id_producto;
-    }
-    public double get_valor_prestamo() {
-        return valor_prestamo;
-    }
-    public boolean get_estado_prestamo() {
-        return estado_prestamo;
-    }
-    public boolean get_mora_prestamo() {
-        return mora_prestamo;
-    }
-    public static int get_contador_prestamos() {
-        return contador_prestamos;
-    }
-    public static double get_ganancias_totales_prestamos() {
-        return ganancias_totales_prestamos;
-    }
+    // Getters
+    public int get_id_prestamo() { return id_prestamo; }
+    public int get_id_cliente() { return id_cliente; }
+    public String get_nombre_cliente() { return nombre_cliente; }
+    public String get_contacto_nombre() { return contacto_cliente; }
+    public LocalDate get_fecha_prestamo() { return fecha_prestamo; }
+    public LocalDate get_fecha_devolucion() { return fecha_devolucion; }
+    public int get_id_producto() { return id_producto; }
+    public double get_valor_prestamo() { return valor_prestamo; }
+    public boolean get_estado_prestamo() { return estado_prestamo; }
+    public boolean get_mora_prestamo() { return mora_prestamo; }
+    public static int get_contador_prestamos() { return contador_prestamos; }
+    public static double get_ganancias_totales_prestamos() { return ganancias_totales_prestamos; }
+
+    // NO se agregan setters ya que al modificarse una variable del objeto puede afectar la trasabilidad del codigo y tener problemas con una futura base de datos
 
 }

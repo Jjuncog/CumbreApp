@@ -12,11 +12,11 @@ public class Main {
 	M05_Ventas ventas = new M05_Ventas(catalogo, inventario, sc);
 	M06_FinalizarDia finalizar = new M06_FinalizarDia(sc);
 	
-	System.out.println("Bienvenido a CumbreApp, el sistema de gestión de Cumbre Colombia\n");
+	System.out.println("Bienvenido a CumbreApp, el sistema de gestión de Cumbre Colombia");
 	int opcion;
 	
 	do {
-		 System.out.println("=====================================");
+		 System.out.println("\n=====================================");
 	     System.out.println("           MENÚ PRINCIPAL");
 	     System.out.println("=====================================");
 	     System.out.println(
@@ -34,9 +34,13 @@ public class Main {
         switch (opcion) {
             case 1:
                 catalogo.mostrar_catalogo();
+                System.out.print("\n¿Desea volver al menú principal? 1=Sí, 0=No (Finalizar jornada): ");
+                if (sc.nextInt() == 0) finalizar.finalizar_dia(ventas, prestamos);
                 break;
             case 2:
                 inventario.mostrar_inventario();
+                System.out.print("\n¿Desea volver al menú principal? 1=Sí, 0=No (Finalizar jornada): ");
+                if (sc.nextInt() == 0) finalizar.finalizar_dia(ventas, prestamos);
                 break;
             case 3:
                	prestamos.mostrarMenuPrestamos();		

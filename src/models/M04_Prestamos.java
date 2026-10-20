@@ -1,6 +1,5 @@
 package models;
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
 
 public class M04_Prestamos {
@@ -36,8 +35,6 @@ public class M04_Prestamos {
         }
         // A futuro se espera agregar una nueva regla de negocio que agrege un costo por mora en la entrega de proctos
     }
-    
-    public M04_Prestamos() {}
 
     public M04_Prestamos(M03_Inventario inventario) {
         this.inventario = inventario;
@@ -178,7 +175,7 @@ public class M04_Prestamos {
     public int get_id_prestamo() { return id_prestamo; }
     public int get_id_cliente() { return id_cliente; }
     public String get_nombre_cliente() { return nombre_cliente; }
-    public String get_contacto_nombre() { return contacto_cliente; }
+    public String get_contacto_cliente() { return contacto_cliente; }
     public LocalDate get_fecha_prestamo() { return fecha_prestamo; }
     public LocalDate get_fecha_devolucion() { return fecha_devolucion; }
     public int get_id_producto() { return id_producto; }

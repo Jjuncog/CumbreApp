@@ -1,11 +1,11 @@
-package models;
+package controller;
 
 /**
  * Inventario de CumbreApp.
  * Guarda el stock de cada producto del catalogo (IDs 1001 a 1005) con una
  * variable por producto, sin arreglos ni listas (restriccion de la Entrega 1).
  */
-public class M03_Inventario {
+public class Inventario {
 
 	private int stock1001;
 	private int stock1002;
@@ -13,7 +13,7 @@ public class M03_Inventario {
 	private int stock1004;
 	private int stock1005;
 
-	public M03_Inventario() {
+	public Inventario() {
 		stock1001 = 60;
 		stock1002 = 55;
 		stock1003 = 62;
@@ -21,7 +21,7 @@ public class M03_Inventario {
 		stock1005 = 63;
 	}
 
-	public M03_Inventario(int s1001, int s1002, int s1003, int s1004, int s1005) {
+	public Inventario(int s1001, int s1002, int s1003, int s1004, int s1005) {
 		stock1001 = Math.max(0, s1001);
 		stock1002 = Math.max(0, s1002);
 		stock1003 = Math.max(0, s1003);

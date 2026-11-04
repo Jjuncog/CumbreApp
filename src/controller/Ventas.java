@@ -1,18 +1,20 @@
-package models;
+package controller;
+
+import models.Producto;
 
 import java.util.Scanner;
 
-public class M05_Ventas {
+public class Ventas {
 
     // Atributos
     private Scanner sc;
-    private M02_Catalogo catalogo;
-    private M03_Inventario inventario;
+    private Catalogo catalogo;
+    private Inventario inventario;
     private String historial;
     private long gananciasAcumuladas;
 
     // Constructor
-    public M05_Ventas(M02_Catalogo catalogo, M03_Inventario inventario, Scanner sc) {
+    public Ventas(Catalogo catalogo, Inventario inventario, Scanner sc) {
         this.catalogo = catalogo;
         this.inventario = inventario;
         this.sc = sc;
@@ -61,7 +63,7 @@ public class M05_Ventas {
     public void registrarVenta() {
         int idProducto, cantidad, precioUnitario, salida;
         long valorVenta;
-        M01_Producto producto;
+        Producto producto;
 
         do {
             System.out.print("Ingrese el ID del producto: ");
@@ -113,7 +115,7 @@ public class M05_Ventas {
     private void registrarCorrecion() {
         int idProducto, cantidad, precioUnitario, salida;
         long valorCorrecion;
-        M01_Producto producto;
+        Producto producto;
 
         do {
             System.out.print("Ingrese el ID del producto: ");

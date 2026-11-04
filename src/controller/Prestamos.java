@@ -1,8 +1,10 @@
-package models;
+package controller;
+import models.Producto;
+
 import java.time.LocalDate;
 import java.util.Scanner;
 
-public class M04_Prestamos {
+public class Prestamos {
 	
 	private Scanner sc;
     private int id_prestamo;
@@ -22,10 +24,10 @@ public class M04_Prestamos {
     private static int contador_prestamos = 0;
     private static double ganancias_totales_prestamos = 0.0;
     
-    private M03_Inventario inventario;
+    private Inventario inventario;
 
     private double valor_total_prestamo(int id_producto, int dias_prestamo){
-        M02_Catalogo catalogo = new M02_Catalogo();
+        Catalogo catalogo = new Catalogo();
         int valor_producto = catalogo.obtener_precio_producto(id_producto);
         if(valor_producto != -1) {
             return valor_producto + ((valor_producto * 0.10) * dias_prestamo);
@@ -36,12 +38,12 @@ public class M04_Prestamos {
         // A futuro se espera agregar una nueva regla de negocio que agrege un costo por mora en la entrega de proctos
     }
 
-    public M04_Prestamos(M03_Inventario inventario) {
+    public Prestamos(Inventario inventario) {
         this.inventario = inventario;
     }
 
     // Registro de prestamos
-    public M04_Prestamos( int id_cliente, String nombre_cliente, String contacto_cliente, LocalDate fecha_prestamo, int dias_prestamo, int id_producto, int cantidad_producto, M03_Inventario inventario){
+    public Prestamos(int id_cliente, String nombre_cliente, String contacto_cliente, LocalDate fecha_prestamo, int dias_prestamo, int id_producto, int cantidad_producto, Inventario inventario){
     	this.cantidad_producto = cantidad_producto;
     	this.inventario = inventario;
         contador_prestamos++;
@@ -114,7 +116,7 @@ public class M04_Prestamos {
     	        System.out.println("Ingrese la cantidad del producto:");
     	        int cantidad_producto = sc.nextInt();
     	        
-    	        M04_Prestamos nuevo = new M04_Prestamos(
+    	        Prestamos nuevo = new Prestamos(
     	            id_cliente, nombre_cliente, contacto_cliente, 
     	            LocalDate.now(), dias_prestamo, id_producto, cantidad_producto, inventario
     	        );
@@ -153,8 +155,8 @@ public class M04_Prestamos {
     }
     		
     public String consultar_prestamo(){
-    	M02_Catalogo catalogoAux = new M02_Catalogo();
-    	M01_Producto prod = catalogoAux.buscar_producto_por_id(id_producto);
+    	Catalogo catalogoAux = new Catalogo();
+    	Producto prod = catalogoAux.buscar_producto_por_id(id_producto);
     	String nombreProd = (prod != null) ? prod.getNombre() : "Producto Desconocido";
     	
         return  "\n=================================================\n" +

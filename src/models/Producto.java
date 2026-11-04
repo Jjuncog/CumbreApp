@@ -1,13 +1,14 @@
 package models;
 
-public class M01_Producto {
+public abstract class Producto {
 	
 	private int id, precio;
 	private String nombre; 
 	
-	public M01_Producto(int id, String nombre, int precio) {
+	public Producto(int id, String nombre, int precio) {
 		this.id = id; this.nombre = nombre; this.precio = precio;
 	}
+	public abstract String fichaTecnica(); // Metodo abstracto que será manipulado en las subclases
 
 	public int getId() {return id;}
 	public void setId(int id) {this.id = id;}

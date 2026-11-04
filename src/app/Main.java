@@ -1,16 +1,17 @@
 package app;
-import models.*;
+import controller.*;
+
 import java.util.Scanner;
 
 public class Main {
 
 	public static void main(String[] args) {
 	Scanner sc = new Scanner(System.in);
-	M02_Catalogo catalogo = new M02_Catalogo();
-	M03_Inventario inventario = new M03_Inventario();
-	M04_Prestamos prestamos = new M04_Prestamos(inventario);
-	M05_Ventas ventas = new M05_Ventas(catalogo, inventario, sc);
-	M06_FinalizarDia finalizar = new M06_FinalizarDia(sc);
+	Catalogo catalogo = new Catalogo();
+	Inventario inventario = new Inventario();
+	Prestamos prestamos = new Prestamos(inventario);
+	Ventas ventas = new Ventas(catalogo, inventario, sc);
+	FinalizarDia finalizar = new FinalizarDia(sc);
 	
 	System.out.println("Bienvenido a CumbreApp, el sistema de gestión de Cumbre Colombia");
 	int opcion;

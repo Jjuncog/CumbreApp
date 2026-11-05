@@ -1,5 +1,4 @@
 package controller;
-
 import models.*;
 
 public class Catalogo {
@@ -43,8 +42,9 @@ public class Catalogo {
 						.append("\n");
 			}
 		}
+		cat.append("==============================================");
 		System.out.println(cat);
-		System.out.println("============================================");
 	}
 
+	public Producto[] getArrCatalogo() {return  catalogo;}
 }

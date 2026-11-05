@@ -1,101 +1,89 @@
 package controller;
+import models.*;
 
-/**
- * Inventario de CumbreApp.
- * Guarda el stock de cada producto del catalogo (IDs 1001 a 1005) con una
- * variable por producto, sin arreglos ni listas (restriccion de la Entrega 1).
- */
 public class Inventario {
+	private Catalogo catalogoAs;
+	private int[] stock;
 
-	private int stock1001;
-	private int stock1002;
-	private int stock1003;
-	private int stock1004;
-	private int stock1005;
-
-	public Inventario() {
-		stock1001 = 60;
-		stock1002 = 55;
-		stock1003 = 62;
-		stock1004 = 51;
-		stock1005 = 63;
+	public Inventario(Catalogo catalogo) {
+		this.catalogoAs = catalogo;
+		this.stock = new int[30]; //Se hace un arreglo paralelo del mismo tamaño que catalogo
+		stock[0] = 60;			  // para poder asignar el stock. En la adición de nuevos productos
+		stock[1] = 55;			  // se actualizarán de forma paralela ambos arreglos
+		stock[2] = 62;
+		stock[3] = 51;
+		stock[4] = 63;
 	}
 
-	public Inventario(int s1001, int s1002, int s1003, int s1004, int s1005) {
-		stock1001 = Math.max(0, s1001);
-		stock1002 = Math.max(0, s1002);
-		stock1003 = Math.max(0, s1003);
-		stock1004 = Math.max(0, s1004);
-		stock1005 = Math.max(0, s1005);
-	}
-
-	// Devuelve el stock del producto, o -1 si el ID no existe
-	private int obtener_stock(int id) {
-		switch (id) {
-			case 1001: return stock1001;
-			case 1002: return stock1002;
-			case 1003: return stock1003;
-			case 1004: return stock1004;
-			case 1005: return stock1005;
-			default:   return -1;
+	private int buscar_indice_por_id(int id) {
+		Producto[] cat = catalogoAs.getArrCatalogo();
+		for (int i = 0; i < cat.length; i++) {
+			if (cat[i] != null && id == cat[i].getId()) {
+				return i;
+			}
 		}
+		return -1;
 	}
+	// Devuelve el stock del producto, o -1 si el ID no existe
 
-	private void asignar_stock(int id, int valor) {
-		switch (id) {
-			case 1001: stock1001 = valor; break;
-			case 1002: stock1002 = valor; break;
-			case 1003: stock1003 = valor; break;
-			case 1004: stock1004 = valor; break;
-			case 1005: stock1005 = valor; break;
-			default: break;
+	public void asignar_stock(int id, int valor) {
+		int indice = buscar_indice_por_id(id);
+		if (indice != -1) {
+			stock[indice] = valor;
 		}
 	}
 
 	public boolean existe_producto(int id) {
-		return obtener_stock(id) != -1;
+		return buscar_indice_por_id(id) != -1;
 	}
 
 	public int consultar_stock(int id) {
-		return obtener_stock(id);
+		int indice = buscar_indice_por_id(id);
+		if (indice != -1) {
+			return stock[indice];
+		}
+		return -1;
 	}
 
 	public boolean hay_stock(int id, int cantidad) {
-		if (!existe_producto(id) || cantidad <= 0) {
-			return false;
-		}
-		return obtener_stock(id) >= cantidad;
+		int stockActual = consultar_stock(id);
+		return stockActual != -1 && stockActual >= cantidad;
 	}
 
 	// Para ventas y prestamos: resta unidades. Devuelve false si no se pudo.
 	public boolean descontar_stock(int id, int cantidad) {
-		if (!hay_stock(id, cantidad)) {
-			return false;
+		int indice = buscar_indice_por_id(id);
+		if (indice != -1 && hay_stock(id, cantidad)) {
+			stock[indice] -= cantidad;
+			return true;
 		}
-		asignar_stock(id, obtener_stock(id) - cantidad);
-		return true;
+		return false;
 	}
 
 	// Para devoluciones y correcciones de venta: suma unidades.
 	public boolean aumentar_stock(int id, int cantidad) {
-		if (!existe_producto(id) || cantidad <= 0) {
-			return false;
+		int indice = buscar_indice_por_id(id);
+		if (indice != -1 && cantidad>0) {
+			stock[indice] += cantidad;
+			return true;
 		}
-		asignar_stock(id, obtener_stock(id) + cantidad);
-		return true;
+		return false;
 	}
 
-	public void mostrar_inventario() {
-		String inventario = "\n=====================================\n";
-		inventario += "    INVENTARIO ACTUAL DE EQUIPOS\n";
-		inventario += "=====================================\n";
-		inventario += "ID: 1001 | Unidades disponibles: " + stock1001 + "\n";
-		inventario += "ID: 1002 | Unidades disponibles: " + stock1002 + "\n";
-		inventario += "ID: 1003 | Unidades disponibles: " + stock1003 + "\n";
-		inventario += "ID: 1004 | Unidades disponibles: " + stock1004 + "\n";
-		inventario += "ID: 1005 | Unidades disponibles: " + stock1005 + "\n";
-		inventario += "=====================================";
-		System.out.println(inventario);
+	public void mostrar_inventario(){
+		Producto[] cat = catalogoAs.getArrCatalogo();
+		StringBuilder inv = new StringBuilder("\n=====================================\n" +
+				                              "      INVENTARIO ACTUAL DE EQUIPOS\n" +
+				                              "=====================================\n");
+		for (int i = 0; i < cat.length; i++) {
+			if (cat[i] != null) {
+				inv.append("ID: ").append(cat[i].getId())
+						.append(" | ").append(cat[i].getNombre())
+						.append(" | ").append("Unidades disponibles: ")
+						.append(stock[i]).append("\n");
+			}
+		}
+		inv.append("=====================================");
+		System.out.println(inv);
 	}
-
 }

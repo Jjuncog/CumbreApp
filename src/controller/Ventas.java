@@ -3,6 +3,7 @@ package controller;
 import models.Producto;
 
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class Ventas {
 
@@ -10,15 +11,15 @@ public class Ventas {
     private Scanner sc;
     private Catalogo catalogo;
     private Inventario inventario;
-    private String historial;
+    private String[] historial= new String[100];
     private long gananciasAcumuladas;
+	private static int contador=0;
 
     // Constructor
     public Ventas(Catalogo catalogo, Inventario inventario, Scanner sc) {
         this.catalogo = catalogo;
         this.inventario = inventario;
         this.sc = sc;
-        historial = "";
         gananciasAcumuladas = 0L;
     }
 
@@ -97,10 +98,10 @@ public class Ventas {
 
             gananciasAcumuladas += valorVenta;
 
-            historial += "VENTA | ID: " + idProducto
+            historial[contador++] = ("VENTA | ID: " + idProducto
                     + " | Producto: " + producto.getNombre()
                     + " | Cantidad: " + cantidad
-                    + " | Total: $" + valorVenta + "\n";
+                    + " | Total: $" + valorVenta + "\n");
 
             System.out.println("\nVenta Registrada Exitosamente.");
             System.out.println("Resumen: " + cantidad + "x " + producto.getNombre() + " -> $" + valorVenta);
@@ -149,10 +150,10 @@ public class Ventas {
 
             gananciasAcumuladas -= valorCorrecion;
 
-            historial += "CORRECCIÓN | ID: " + idProducto
+            historial[contador++] = ("CORRECCIÓN | ID: " + idProducto
                     + " | Producto: " + producto.getNombre()
                     + " | Cantidad: " + cantidad
-                    + " | Valor corrección: -$" + valorCorrecion + "\n";
+                    + " | Valor corrección: -$" + valorCorrecion + "\n");
 
             System.out.println("\n¡Corrección Registrada Exitosamente!");
             System.out.println("Resumen: Se regresaron " + cantidad + "x " + producto.getNombre() + " -> -$" + valorCorrecion);
@@ -171,7 +172,7 @@ public class Ventas {
         if (historial.isEmpty()) {
             System.out.println("No se han registrado ventas.");
         } else {
-            System.out.print(historial);
+            System.out.print(Arrays.toString(historial));
         }
         System.out.println("==========================================================================================");
         
@@ -189,6 +190,6 @@ public class Ventas {
         if (historial.isEmpty()) {
             return 0;
         }
-        return historial.split("\n").length;
+        return contador;
     }
 }

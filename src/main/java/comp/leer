@@ -1,0 +1,1 @@
+todos los archivos que tengan un excel al final solo hacen de conexion entre el excel y su respoectiva clase (para que las calses principales no queden tan sobre cargadas) estos solo hacen un proceso crud

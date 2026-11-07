@@ -45,7 +45,7 @@ La interfaz de la aplicación se ejecuta íntegramente a través de la consola.
    git clone <https://github.com/Jjuncog/CumbreApp>
    ```
 2. Abra el directorio del proyecto en su editor de código (por ejemplo, Visual Studio Code con el *Extension Pack for Java*, o Eclipse).
-3. En el explorador de archivos del proyecto, diríjase a la ruta `src/app/` y abra el archivo `Main.java`.
+3. En el explorador de archivos del proyecto, diríjase a la ruta `src/main/java/app/` y abra el archivo `Main.java`.
 4. Ejecute el archivo principal. 
 5. Podrá interactuar con el menú del sistema directamente desde la terminal integrada de su editor.
 

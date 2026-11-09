@@ -18,16 +18,13 @@ public class Prestamos {
     public Prestamo crearPrestamo(int idCliente, String nombreCliente, String contactoCliente, int dias, int idProducto, int cantidad){
         Producto producto = inventario.obtenerProductoDisponible(idProducto);
         if(dias <= 0) {
-            System.out.println("Los días de préstamo deben ser mayores a cero");
-            return;
+        throw new IllegalArgumentException ("Los días de préstamo deben ser mayores a cero");
         }
         if(cantidad <= 0) {
-            System.out.println("La cantidad debe ser mayor a cero");
-            return;
+            throw new IllegalArgumentException ("La cantidad debe ser mayor a cero");
         }
         if(!producto.hayStock(cantidad)) {
-            System.out.println("No hay stock suficiente ");
-            return;
+            throw new IllegalArgumentException ("No hay stock suficiente ");
         }
 
         LocalDate hoy = LocalDate.now();
@@ -42,8 +39,7 @@ public class Prestamos {
     public Prestamo registrarDevolucion(int idPrestamo) {
         Prestamo prestamo = registro.buscarPorId(idPrestamo);
         if(prestamo == null) {
-            System.out.println("No existe el préstamo " + idPrestamo);
-            return;
+            throw new IllegalArgumentException ("No existe el préstamo " + idPrestamo);
         }
         prestamo.registrarDevolucion();
         registro.actualizarPrestamos(prestamo);

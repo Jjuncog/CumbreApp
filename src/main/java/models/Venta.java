@@ -11,6 +11,7 @@ public class Venta {
     private final int idVenta;
     private final LocalDate fecha;
     private final int idProducto;
+    private final int idFactura;
     private final int cantidad;
     private final long valor;
     private final String tipo;
@@ -47,6 +48,7 @@ public class Venta {
 
     public int getIdVenta() { return idVenta; }
     public LocalDate getFecha() { return fecha; }
+    public int getIdFactura() { return idFactura;}
     public int getIdProducto() { return idProducto; }
     public int getCantidad() { return cantidad; }
     public long getValor() { return valor; }

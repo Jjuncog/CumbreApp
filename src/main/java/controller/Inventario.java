@@ -99,7 +99,7 @@ public class Inventario {
     public void devolverStock(int id, int cantidad) {
         Producto producto = registro.buscarProductoPorId(id);
         if(producto == null) {
-            System.out.println("No existe un producto con ID " + id);
+        throw new IllegalArgumentException("No existe un producto con ID " + id);
         }
         producto.aumentar(cantidad);
         registro.actualizarProducto(producto);

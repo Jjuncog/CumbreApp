@@ -43,6 +43,7 @@ public class Prestamos {
         Prestamo prestamo = registro.buscarPorId(idPrestamo);
         if(prestamo == null) {
             System.out.println("No existe el préstamo " + idPrestamo);
+            return;
         }
         prestamo.registrarDevolucion();
         registro.actualizarPrestamos(prestamo);

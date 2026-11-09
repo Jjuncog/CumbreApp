@@ -13,8 +13,11 @@ public class Ventas {
         this.inventario = inventario;
         this.registro = registro;
     }
-
-    public Venta registrarVenta(int idProducto, int cantidad) {
+    public int generarNuevoIdFactura() {
+        return registro.siguienteIdFactura();
+    }
+    
+    public Venta registrarVenta(int idFactura, int idProducto, int cantidad) {
         Producto producto = inventario.obtenerProductoDisponible(idProducto);
         if (cantidad <= 0) {
             throw new IllegalArgumentException ("La cantidad debe ser mayor a cero");
@@ -24,12 +27,16 @@ public class Ventas {
         }
 
         long valor = (long) producto.getPrecio() * cantidad;
-        Venta venta = new Venta(registro.siguienteId(), LocalDate.now(), idProducto, cantidad, valor, Venta.TIPO_VENTA);
+        Venta venta = new Venta(registro.siguienteId(), idFactura, LocalDate.now(), idProducto, cantidad, valor, Venta.TIPO_VENTA);
 
         registro.guardar(venta);
         inventario.descontarStock(idProducto, cantidad);
         return venta;
     }
+    public Venta[] obtenerVentasPorFactura(int idFactura) {
+        return registro.buscarPorFactura(idFactura);
+    }
+    
     public Venta registrarCorreccion(int idProducto, int cantidad) {
         Producto producto = inventario.buscarProducto(idProducto);
         if (producto == null) {
@@ -45,7 +52,7 @@ public class Ventas {
         }
 
         long valor = (long) producto.getPrecio() * cantidad;
-        Venta correccion = new Venta(registro.siguienteId(), LocalDate.now(), idProducto,
+        Venta correccion = new Venta(registro.siguienteId(), 0, LocalDate.now(), idProducto,
                 cantidad, valor, Venta.TIPO_CORRECCION);
 
         registro.guardar(correccion);

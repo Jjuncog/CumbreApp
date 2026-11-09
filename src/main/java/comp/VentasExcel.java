@@ -6,7 +6,7 @@ public class VentasExcel {
 
     private static final String HOJA = "Ventas";
     private static final String[] ENCABEZADOS = {
-            "id_venta", "fecha", "id_producto", "cantidad", "valor", "tipo"
+            "id_venta", "id_factura", "fecha", "id_producto", "cantidad", "valor", "tipo"
     };
 
     private final ExcelManager excel;
@@ -18,6 +18,36 @@ public class VentasExcel {
 
     public int siguienteId() {
         return excel.siguienteId(HOJA);
+    }
+
+    // Calcula el número de la siguiente factura consultando las existentes
+    public int siguienteIdFactura() {
+        Venta[] todas = listarTodas();
+        int maxId = 0;
+        for (Venta v : todas) {
+            if (v.getIdFactura() > maxId) {
+                maxId = v.getIdFactura();
+            }
+        }
+        return maxId + 1;
+    }
+
+    // Filtra las ventas guardadas por el idFactura
+    public Venta[] buscarPorFactura(int idFactura) {
+        Venta[] todas = listarTodas();
+        int contador = 0;
+        for (Venta v : todas) {
+            if (v.getIdFactura() == idFactura) contador++;
+        }
+
+        Venta[] resultado = new Venta[contador];
+        int idx = 0;
+        for (Venta v : todas) {
+            if (v.getIdFactura() == idFactura) {
+                resultado[idx++] = v;
+            }
+        }
+        return resultado;
     }
 
     public void guardar(Venta venta) {

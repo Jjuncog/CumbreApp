@@ -18,9 +18,11 @@ public class Ventas {
         Producto producto = inventario.obtenerProductoDisponible(idProducto);
         if (cantidad <= 0) {
             System.out.println("La cantidad debe ser mayor a cero");
+            return;
         }
         if (!producto.hayStock(cantidad)) {
             System.out.println("No hay stock suficiente");
+            return;
         }
 
         long valor = (long) producto.getPrecio() * cantidad;

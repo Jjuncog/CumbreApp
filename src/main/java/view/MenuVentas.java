@@ -45,20 +45,44 @@ public class MenuVentas {
     }
 
     private void registrarVenta() {
+        int idFactura = ventas.generarNuevoIdFactura();
         boolean otra = true;
         while (otra){
             int idProducto = consola.leerEntero("Ingrese el ID del producto:");
             int cantidad = consola.leerEntero("Ingrese la cantidad solicitada:");
 
-            Venta venta = ventas.registrarVenta(idProducto, cantidad);
+            Venta venta = ventas.registrarVenta(idFactura, idProducto, cantidad);
             System.out.println("\nVenta registrada exitosamente.");
             System.out.println("Resumen: " + venta.getCantidad() + "x "
                     + inventario.nombreProducto(idProducto) + " -> " + Consola.dinero(venta.getValor()));
 
             otra = consola.confirmar("\n¿Desea registrar otro producto?");
         }
+        imprimirFactura(idFactura);
     }
 
+private void imprimirFactura(int idFactura) {
+        Venta[] detalle = ventas.obtenerVentasPorFactura(idFactura);
+        if (detalle.length == 0) return;
+
+        System.out.println("\n==========================================================");
+        System.out.println("                  FACTURA DE VENTA N° " + idFactura);
+        System.out.println("                  Fecha: " + detalle[0].getFecha());
+        System.out.println("==========================================================");
+
+        long granTotal = 0;
+        for (Venta v : detalle) {
+            String nombreProd = inventario.nombreProducto(v.getIdProducto());
+            System.out.printf("%-30s | Cant: %2d | Subtotal: %s%n",
+                    nombreProd, v.getCantidad(), Consola.dinero(v.getValor()));
+            granTotal += v.getValor();
+        }
+
+        System.out.println("----------------------------------------------------------");
+        System.out.printf("TOTAL A PAGAR: %37s%n", Consola.dinero(granTotal));
+        System.out.println("==========================================================\n");
+    }
+    
     private void registrarCorreccion() {
         int idProducto = consola.leerEntero("Ingrese el ID del producto:");
         int cantidad = consola.leerEntero("Ingrese la cantidad que debe corregirse (si ingresó 5 y eran 3 ingrese 2):");
@@ -80,8 +104,8 @@ public class MenuVentas {
         }
         for (int i = 0; i < historial.length; i++) {
             Venta v = historial[i];
-            System.out.printf("%-10s | ID: %d | Producto: %-42s | Cantidad: %d | Total: %s%n",
-                    v.getTipo(), v.getIdProducto(), inventario.nombreProducto(v.getIdProducto()),
+            System.out.printf("%-10s | Factura: %d | ID: %d | Producto: %-42s | Cantidad: %d | Total: %s%n",
+                    v.getTipo(), v.getIdFactura(), v.getIdProducto(), inventario.nombreProducto(v.getIdProducto()),
                     v.getCantidad(), Consola.dinero(v.getValorConSigno()));
         }
         System.out.println("==========================================================================================");

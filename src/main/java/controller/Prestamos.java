@@ -19,12 +19,15 @@ public class Prestamos {
         Producto producto = inventario.obtenerProductoDisponible(idProducto);
         if(dias <= 0) {
             System.out.println("Los días de préstamo deben ser mayores a cero");
+            return;
         }
         if(cantidad <= 0) {
             System.out.println("La cantidad debe ser mayor a cero");
+            return;
         }
         if(!producto.hayStock(cantidad)) {
             System.out.println("No hay stock suficiente ");
+            return;
         }
 
         LocalDate hoy = LocalDate.now();

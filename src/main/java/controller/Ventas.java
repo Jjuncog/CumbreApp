@@ -17,12 +17,10 @@ public class Ventas {
     public Venta registrarVenta(int idProducto, int cantidad) {
         Producto producto = inventario.obtenerProductoDisponible(idProducto);
         if (cantidad <= 0) {
-            System.out.println("La cantidad debe ser mayor a cero");
-            return;
+            throw new IllegalArgumentException ("La cantidad debe ser mayor a cero");
         }
         if (!producto.hayStock(cantidad)) {
-            System.out.println("No hay stock suficiente");
-            return;
+            throw new IllegalArgumentException ("No hay stock suficiente");
         }
 
         long valor = (long) producto.getPrecio() * cantidad;

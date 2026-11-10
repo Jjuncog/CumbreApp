@@ -141,7 +141,7 @@ public class MenuPrestamos {
         for (int i = 0; i < pendientes.length; i++) {
             Prestamo p = pendientes[i];
             System.out.printf("#%-4d %-22s %-35s x%-3d hasta %s  [%s]%n",
-                    p.getIdPrestamo(), p.getIdFactura(), p.getNombreCliente(), inventario.nombreProducto(p.getIdProducto()),
+                    p.getIdPrestamo(), p.getNombreCliente(), inventario.nombreProducto(p.getIdProducto()),
                     p.getCantidad(), p.getFechaDevolucion(), p.getEstado());
         }
         System.out.println("==========================================================================");

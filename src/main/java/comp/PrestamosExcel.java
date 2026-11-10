@@ -6,7 +6,7 @@ public class PrestamosExcel {
 
     private static final String HOJA = "Prestamos";
     private static final String[] ENCABEZADOS = {
-            "id_prestamo", "id_cliente", "nombre_cliente", "contacto_cliente",
+            "id_prestamo", "id_factura", "id_cliente", "nombre_cliente", "contacto_cliente",
             "fecha_prestamo", "fecha_devolucion", "id_producto", "cantidad_producto",
             "valor_prestamo", "estado_prestamo"
     };
@@ -22,6 +22,34 @@ public class PrestamosExcel {
         return excel.siguienteId(HOJA);
     }
 
+public int siguienteIdFactura() {
+        Prestamo[] todos = listarTodosPrestamos();
+        int maxId = 0;
+        for (Prestamo p : todos) {
+            if (p.getIdFactura() > maxId) {
+                maxId = p.getIdFactura();
+            }
+        }
+        return maxId + 1;
+    }
+
+    public Prestamo[] buscarPorFactura(int idFactura) {
+        Prestamo[] todos = listarTodosPrestamos();
+        int contador = 0;
+        for (Prestamo p : todos) {
+            if (p.getIdFactura() == idFactura) contador++;
+        }
+
+        Prestamo[] resultado = new Prestamo[contador];
+        int idx = 0;
+        for (Prestamo p : todos) {
+            if (p.getIdFactura() == idFactura) {
+                resultado[idx++] = p;
+            }
+        }
+        return resultado;
+    }
+    
     public void guardarPrestamos(Prestamo prestamo) {
         excel.agregarFila(HOJA, aFila(prestamo));
     }
@@ -52,7 +80,7 @@ public class PrestamosExcel {
     }
     private Object[] aFila(Prestamo prestamo) {
         return new Object[]{
-                prestamo.getIdPrestamo(), prestamo.getIdCliente(),prestamo.getNombreCliente(), prestamo.getContactoCliente(),
+                prestamo.getIdPrestamo(), prestam.gestIdFactura(), prestamo.getIdCliente(),prestamo.getNombreCliente(), prestamo.getContactoCliente(),
                 prestamo.getFechaPrestamo(), prestamo.getFechaDevolucion(), prestamo.getIdProducto(), prestamo.getCantidad(),
                 prestamo.getValor(), prestamo.isDevuelto() ? "DEVUELTO" : "ACTIVO"
         };

@@ -23,7 +23,7 @@ public class MenuPrestamos {
             consola.titulo("     MENÚ DE PRÉSTAMOS");
             System.out.println("""
                     Seleccione una opción para continuar:
-
+                    
                     1. Añadir un préstamo
                     2. Registrar devolución de equipo
                     3. Consultar un préstamo
@@ -36,34 +36,45 @@ public class MenuPrestamos {
 
             try {
                 switch (op) {
-                    case 1: anadirPrestamo(); break;
-                    case 2: registrarDevolucion(); break;
-                    case 3: consultarPrestamo(); break;
-                    case 4: verPendientes(); break;
-                    case 5: System.out.println("Regresando al menú principal...\n"); break;
-                    default: System.out.println("Opción inválida. Ingrese una nueva opción.");
+                    case 1:
+                        anadirPrestamo();
+                        break;
+                    case 2:
+                        registrarDevolucion();
+                        break;
+                    case 3:
+                        consultarPrestamo();
+                        break;
+                    case 4:
+                        verPendientes();
+                        break;
+                    case 5:
+                        System.out.println("Regresando al menú principal...\n");
+                        break;
+                    default:
+                        System.out.println("Opción inválida. Ingrese una nueva opción.");
                 }
-            } catch(RuntimeException e) {
+            } catch (RuntimeException e) {
                 consola.error(e.getMessage());
             }
-        } while(op != 5);
+        } while (op != 5);
     }
 
     private void anadirPrestamo() {
         boolean otra = true;
         int idFactura = prestamos.generarNuevoIdFactura();
-        while (otra){
-        int idCliente = consola.leerEntero("Ingrese el ID del cliente:");
-        String nombre = consola.leerTexto("Ingrese el nombre del cliente:");
-        String contacto = consola.leerTexto("Ingrese el contacto (correo) del cliente:");
-        int dias = consola.leerEntero("Ingrese los días de préstamo:");
-        int idProducto = consola.leerEntero("Ingrese la ID del producto:");
-        int cantidad = consola.leerEntero("Ingrese la cantidad del producto:");
+        while (otra) {
+            int idCliente = consola.leerEntero("Ingrese el ID del cliente:");
+            String nombre = consola.leerTexto("Ingrese el nombre del cliente:");
+            String contacto = consola.leerTexto("Ingrese el contacto (correo) del cliente:");
+            int dias = consola.leerEntero("Ingrese los días de préstamo:");
+            int idProducto = consola.leerEntero("Ingrese la ID del producto:");
+            int cantidad = consola.leerEntero("Ingrese la cantidad del producto:");
 
-        Prestamo nuevo = prestamos.crearPrestamo(idCliente, nombre, contacto, dias, idProducto, cantidad);
-        System.out.println("\n¡Préstamo registrado exitosamente!");
-        System.out.println(ficha(nuevo));
-        otra = consola.confirmar("\n¿Desea registrar otro producto?");
+            Prestamo nuevo = prestamos.crearPrestamo(idFactura, idCliente, nombre, contacto, dias, idProducto, cantidad);
+            System.out.println("\n¡Préstamo registrado exitosamente!");
+            System.out.println(ficha(nuevo));
+            otra = consola.confirmar("\n¿Desea registrar otro producto?");
         }
         imprimirFactura(idFactura);
     }
@@ -103,7 +114,7 @@ public class MenuPrestamos {
         System.out.printf("GRAN TOTAL A PAGAR: %68s%n", Consola.dinero(granTotal));
         System.out.println("==========================================================================================\n");
     }
-    
+
     private void registrarDevolucion() {
         int id = consola.leerEntero("Ingrese el ID del préstamo a devolver:");
         Prestamo p = prestamos.registrarDevolucion(id);
@@ -117,7 +128,7 @@ public class MenuPrestamos {
         if (p == null) {
             System.out.println("No existe el préstamo " + id + ".");
         } else {
-            imrpimirFactura(p.getIdFactura());
+            imprimirFactura(p.getIdFactura());
         }
     }
 
@@ -136,4 +147,19 @@ public class MenuPrestamos {
         System.out.println("==========================================================================");
     }
 
-   
+    private String ficha(Prestamo p) {
+        return "\n=================================================\n" +
+                "                  PRÉSTAMO " + p.getIdPrestamo() + "\n" +
+                "=================================================\n" +
+                "Cliente: " + p.getNombreCliente() + " (ID: " + p.getIdCliente() + ")\n" +
+                "Contacto: " + p.getContactoCliente() + "\n" +
+                "Fecha del préstamo: " + p.getFechaPrestamo() + "\n" +
+                "Fecha límite devolución: " + p.getFechaDevolucion() + "\n" +
+                "Producto: " + inventario.nombreProducto(p.getIdProducto()) + " (ID: " + p.getIdProducto() + ")\n" +
+                "Cantidad: " + p.getCantidad() + "\n" +
+                "Estado préstamo: " + p.getEstado() + "\n" +
+                "=================================================\n" +
+                "Valor total préstamo: " + Consola.dinero(p.getValor()) + "\n" +
+                "=================================================";
+    }
+}

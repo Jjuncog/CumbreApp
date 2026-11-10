@@ -80,7 +80,7 @@ public int siguienteIdFactura() {
     }
     private Object[] aFila(Prestamo prestamo) {
         return new Object[]{
-                prestamo.getIdPrestamo(), prestam.gestIdFactura(), prestamo.getIdCliente(),prestamo.getNombreCliente(), prestamo.getContactoCliente(),
+                prestamo.getIdPrestamo(), prestamo.getIdFactura(), prestamo.getIdCliente(),prestamo.getNombreCliente(), prestamo.getContactoCliente(),
                 prestamo.getFechaPrestamo(), prestamo.getFechaDevolucion(), prestamo.getIdProducto(), prestamo.getCantidad(),
                 prestamo.getValor(), prestamo.isDevuelto() ? "DEVUELTO" : "ACTIVO"
         };
@@ -90,14 +90,15 @@ public int siguienteIdFactura() {
         return new Prestamo(
                 ExcelManager.aEntero(index[0]),
                 ExcelManager.aEntero(index[1]),
-                ExcelManager.aTexto(index[2]),
+                ExcelManager.aEntero(index[2]),
                 ExcelManager.aTexto(index[3]),
-                ExcelManager.aFecha(index[4]),
+                ExcelManager.aTexto(index[4]),
                 ExcelManager.aFecha(index[5]),
-                ExcelManager.aEntero(index[6]),
+                ExcelManager.aFecha(index[6]),
                 ExcelManager.aEntero(index[7]),
-                ExcelManager.aDecimal(index[8]),
-                ExcelManager.aTexto(index[9]).equalsIgnoreCase("DEVUELTO")
+                ExcelManager.aEntero(index[8]),
+                ExcelManager.aDecimal(index[9]),
+                ExcelManager.aTexto(index[10]).equalsIgnoreCase("DEVUELTO")
         );
     }
 }

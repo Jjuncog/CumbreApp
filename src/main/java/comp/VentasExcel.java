@@ -72,11 +72,12 @@ public class VentasExcel {
     private Venta aObjeto(Object[] index) {
         return new Venta(
                 ExcelManager.aEntero(index[0]),
-                ExcelManager.aFecha(index[1]),
-                ExcelManager.aEntero(index[2]),
+                ExcelManager.aEntero(index[1]),
+                ExcelManager.aFecha(index[2]),
                 ExcelManager.aEntero(index[3]),
-                (long) ExcelManager.aDecimal(index[4]),
-                ExcelManager.aTexto(index[5]).toUpperCase()
+                ExcelManager.aEntero(index[4]),
+                (long) ExcelManager.aDecimal(index[5]),
+                ExcelManager.aTexto(index[6]).toUpperCase()
         );
     }
 }

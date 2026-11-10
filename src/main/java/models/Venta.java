@@ -28,7 +28,7 @@ public class Venta {
         }
         this.idVenta = idVenta;
         this.fecha = fecha;
-        this.idFactura= idFactura
+        this.idFactura= idFactura;
         this.idProducto = idProducto;
         this.cantidad = cantidad;
         this.valor = valor;

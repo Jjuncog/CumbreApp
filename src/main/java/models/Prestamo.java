@@ -10,6 +10,7 @@ public class Prestamo {
     private final int idPrestamo;
 
     private final int idCliente;
+    private final int idFactura;
     private final String nombreCliente;
     private final String contactoCliente;
 
@@ -20,7 +21,7 @@ public class Prestamo {
     private final double valor;
     private boolean devuelto;
 
-    public Prestamo(int idPrestamo, int idCliente, String nombreCliente, String contactoCliente, LocalDate fechaPrestamo, LocalDate fechaDevolucion, int idProducto, int cantidad, double valor, boolean devuelto) {
+    public Prestamo(int idPrestamo, int idFactura, int idCliente, String nombreCliente, String contactoCliente, LocalDate fechaPrestamo, LocalDate fechaDevolucion, int idProducto, int cantidad, double valor, boolean devuelto) {
         if (cantidad <= 0) {
             throw new IllegalArgumentException("La cantidad debe ser mayor a cero");
         }
@@ -32,6 +33,7 @@ public class Prestamo {
         }
         this.idPrestamo = idPrestamo;
         this.idCliente = idCliente;
+        this.idFactura = idFactura;
         this.nombreCliente = nombreCliente;
         this.contactoCliente = contactoCliente;
         this.fechaPrestamo = fechaPrestamo;
@@ -69,6 +71,7 @@ public class Prestamo {
 
     public int getIdPrestamo() { return idPrestamo; }
     public int getIdCliente() { return idCliente; }
+    public int getIdFactura() {return idFactura; }
     public String getNombreCliente() { return nombreCliente; }
     public String getContactoCliente() { return contactoCliente; }
     public LocalDate getFechaPrestamo() { return fechaPrestamo; }

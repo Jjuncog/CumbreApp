@@ -16,7 +16,7 @@ public class Venta {
     private final long valor;
     private final String tipo;
 
-    public Venta(int idVenta, LocalDate fecha, int idProducto, int cantidad, long valor, String tipo) {
+    public Venta(int idVenta, int idFactura, LocalDate fecha, int idProducto, int cantidad, long valor, String tipo) {
         if (cantidad <= 0) {
             throw new IllegalArgumentException("La cantidad debe ser mayor a 0.");
         }
@@ -28,6 +28,7 @@ public class Venta {
         }
         this.idVenta = idVenta;
         this.fecha = fecha;
+        this.idFactura= idFactura
         this.idProducto = idProducto;
         this.cantidad = cantidad;
         this.valor = valor;

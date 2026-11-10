@@ -14,8 +14,12 @@ public class Prestamos {
         this.inventario = inventario;
         this.registro = registro;
     }
-
-    public Prestamo crearPrestamo(int idCliente, String nombreCliente, String contactoCliente, int dias, int idProducto, int cantidad){
+    
+public int generarNuevoIdFactura() {
+        return registro.siguienteIdFactura();
+    }
+    
+    public Prestamo crearPrestamo(int idFactura, int idCliente, String nombreCliente, String contactoCliente, int dias, int idProducto, int cantidad){
         Producto producto = inventario.obtenerProductoDisponible(idProducto);
         if(dias <= 0) {
         throw new IllegalArgumentException ("Los días de préstamo deben ser mayores a cero");
@@ -29,11 +33,15 @@ public class Prestamos {
 
         LocalDate hoy = LocalDate.now();
         double valor = Prestamo.calcularValor(producto.getPrecio(), dias, cantidad);
-        Prestamo prestamo = new Prestamo(registro.siguienteId(), idCliente, nombreCliente, contactoCliente, hoy, hoy.plusDays(dias), idProducto, cantidad, valor, false);
+        Prestamo prestamo = new Prestamo(registro.siguienteId(), idFactura, idCliente, nombreCliente, contactoCliente, hoy, hoy.plusDays(dias), idProducto, cantidad, valor, false);
 
         registro.guardarPrestamos(prestamo);
         inventario.descontarStock(idProducto, cantidad); // Solo se va a descontar el producto del estoc si el prestamo se pudo cargar bien
         return prestamo;
+    }
+
+    public Prestamo[] obtenerPrestamosPorFactura(int idFactura) {
+        return registro.buscarPorFactura(idFactura);
     }
 
     public Prestamo registrarDevolucion(int idPrestamo) {

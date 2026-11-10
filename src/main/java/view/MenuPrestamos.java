@@ -50,6 +50,8 @@ public class MenuPrestamos {
     }
 
     private void anadirPrestamo() {
+        boolean otra = true;
+        while (otra){
         int idCliente = consola.leerEntero("Ingrese el ID del cliente:");
         String nombre = consola.leerTexto("Ingrese el nombre del cliente:");
         String contacto = consola.leerTexto("Ingrese el contacto (correo) del cliente:");
@@ -60,6 +62,8 @@ public class MenuPrestamos {
         Prestamo nuevo = prestamos.crearPrestamo(idCliente, nombre, contacto, dias, idProducto, cantidad);
         System.out.println("\n¡Préstamo registrado exitosamente!");
         System.out.println(ficha(nuevo));
+        otra = consola.confirmar("\n¿Desea registrar otro producto?");
+        }
     }
 
     private void registrarDevolucion() {

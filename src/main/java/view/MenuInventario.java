@@ -8,6 +8,8 @@ public class MenuInventario {
     private final Inventario inventario;
     private final Consola consola;
 
+
+
     public MenuInventario(Inventario inventario, Consola consola) {
         this.inventario = inventario;
         this.consola = consola;
@@ -20,7 +22,7 @@ public class MenuInventario {
             System.out.println("""
                     
                     1. Ver catálogo e inventario
-                    2. Ver ficha técnica de un producto
+                    2. Ver ficha técnica de un producto o en general
                     3. Agregar un producto nuevo
                     4. Actualizar el precio de un producto
                     5. Registrar entrada de unidades
@@ -67,6 +69,37 @@ public class MenuInventario {
     }
 
     private void verFicha() {
+        int caso =consola.leerEntero("Ingrese 0 si desea consultar las fichas técnicas en general o 1 si desa consultar la ficha de un producto");
+        switch (caso){
+            case 0:
+                String [][] matriz = new String[2][2];
+                matriz[0][0]="Categoría: Equipo Anticaídas. " +
+                        "Función principal: Prevenir descensos bruscos, absorber impactos " +
+                        "y garantizar soporte continuo durante trabajos exhaustivos en alturas.";
+                matriz[0][1]="Categoría: Hardware de Conexión. " +
+                        "Función principal: Proveer puntos de anclaje confiables " +
+                        "y articular los distintos componentes de los sistemas de seguridad.";
+                matriz[1][0]="Categoría: Herramientas Operativas. " +
+                        "Función principal: Facilitar la ejecución manual de tareas de instalación, " +
+                        "ensamble y mantenimiento, optimizando el esfuerzo físico del usuario.";
+                matriz[1][1]="Categoría: Protección Personal. " +
+                        "Función principal: Mitigar el riesgo de lesiones " +
+                        "y salvaguardar la integridad física del operario frente a riesgos laborales generales.";
+
+                System.out.println("        [EQUIPO ANTICAIDAS]     |    [HARDWARE DE CONEXIÓN]");
+                System.out.println("--------------------------------------------");
+                System.out.println("    [HERRAMIENTAS OPERATIVAS]   |    [PROTECCIÓN PERSONAL]");
+
+
+                int i=consola.leerEntero("Ingrese la fila de que ficha técnica quiere consultar (de 0 a 1): ");
+                int j=consola.leerEntero("Ingrese la columna de que ficha técnica quiere consultar (de 0 a 1): ");
+                if (i>1 || j>1 || i<0 || j<0){
+                    System.out.println(" NÚMERO INVÁLIDO"); }
+                else{
+                    System.out.println(matriz[i][j]);}
+                    break;
+            case 1:
+
         int id = consola.leerEntero("Ingrese el ID del producto:");
         Producto p = inventario.buscarProducto(id);
 
@@ -78,6 +111,11 @@ public class MenuInventario {
                 + (p.isActivo() ? "" : "  [RETIRADO]"));
         System.out.println("Precio: " + Consola.dinero(p.getPrecio()) + " | Unidades: " + p.getCantidad());
         System.out.println(p.fichaTecnica());
+
+        break;
+
+        default:
+            System.out.println("INGRESA UNA OPCIÓN VÁLIDA");}
     }
 
     private void agregarProducto() {

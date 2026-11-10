@@ -27,7 +27,7 @@ Este repositorio contiene el código fuente de **CumbreApp**, un aplicativo desa
 
 ## Estado del Proyecto
 
-El proyecto ha completado satisfactoriamente su **Entrega 1**. Durante esta fase, se estructuró el modelo organizando el código en los paquetes `app` y `models`, con el fin de establecer una estructura MVC en futuras entregas. Actualmente, se dispone de un prototipo funcional en consola que permite gestionar el catálogo, verificar el inventario, realizar ventas, registrar préstamos y generar el balance de cierre de jornada.
+El proyecto ha completado satisfactoriamente su **Entrega 2**. Durante esta fase, se estructuró el modelo organizando el código en los paquetes `app`, `comp`, `controller`, `models` y `view`, con el fin de inicializar una estructura más organizada y funcional para facilitar el proceso durante la ultima entrega. Actualmente, se dispone de un prototipo funcional en consola que permite gestionar el catálogo e inventario, identificar fichas técnicas de productos según su tipo, realizar ventas, registrar préstamos y generar el balance de cierre de jornada, con una base de datos temporal en ejecución.
 
 ---
 

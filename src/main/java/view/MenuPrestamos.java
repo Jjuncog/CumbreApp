@@ -136,4 +136,19 @@ public class MenuPrestamos {
         System.out.println("==========================================================================");
     }
 
+   private String ficha(Prestamo p) {
+    return "\n=================================================\n" +
+           "                  PRÉSTAMO " + p.getIdPrestamo() + "\n" +
+           "=================================================\n" +
+           "Cliente: " + p.getNombreCliente() + " (ID: " + p.getIdCliente() + ")\n" +
+           "Contacto: " + p.getContactoCliente() + "\n" +
+           "Fecha del préstamo: " + p.getFechaPrestamo() + "\n" +
+           "Fecha límite devolución: " + p.getFechaDevolucion() + "\n" +
+           "Producto: " + inventario.nombreProducto(p.getIdProducto()) + " (ID: " + p.getIdProducto() + ")\n" +
+           "Cantidad: " + p.getCantidad() + "\n" +
+           "Estado préstamo: " + p.getEstado() + "\n" +
+           "=================================================\n" +
+           "Valor total préstamo: " + Consola.dinero(p.getValor()) + "\n" +
+           "=================================================";
+}
    

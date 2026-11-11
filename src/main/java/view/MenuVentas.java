@@ -38,13 +38,14 @@ public class MenuVentas {
                     case 4: System.out.println("Regresando al menú principal...\n"); break;
                     default: System.out.println("Opción inválida.");
                 }
-            } catch (RuntimeException e) {
-                consola.error(e.getMessage());
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         } while (op != 4);
     }
 
     private void registrarVenta() {
+
         int idFactura = ventas.generarNuevoIdFactura();
         boolean otra = true;
         while (otra){

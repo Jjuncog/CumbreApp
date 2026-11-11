@@ -37,14 +37,17 @@ public class ExcelManager {
     public void prepararHoja(String nombreHoja, String[] encabezados) {
         try (Workbook libro = cargarLibro()) {
 
-
-            if(libro.getSheet(nombreHoja) != null) return; // se hace para saber si ya existe una hoja con el mismo nombre
-
+            Sheet existente = libro.getSheet(nombreHoja);
+            if (existente != null) {
+                // La hoja ya existe: se comprueba que tenga las mismas columnas que espera el programa
+                verificarEncabezados(existente, nombreHoja, encabezados);
+                return;
+            }
 
             Sheet hoja = libro.createSheet(nombreHoja);
-            Row fila =hoja.createRow(FILA_ENCABEZADO);
+            Row fila = hoja.createRow(FILA_ENCABEZADO);
 
-            for(int i = 0; i<encabezados.length; i++) {
+            for (int i = 0; i < encabezados.length; i++) {
                 Cell celda = fila.createCell(i);
                 celda.setCellValue(encabezados[i]);
 
@@ -52,8 +55,38 @@ public class ExcelManager {
             }
 
             guardarLibro(libro);
-        }catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (IOException e) {
+            throw errorDeArchivo("preparar la hoja " + nombreHoja, e);
+        }
+    }
+
+    private void verificarEncabezados(Sheet hoja, String nombreHoja, String[] esperados) {
+        Row encabezado = hoja.getRow(FILA_ENCABEZADO);
+        String encontrados = "";
+        boolean coinciden = encabezado != null;
+
+        for (int i = 0; i < esperados.length; i++) {
+            String texto = (encabezado == null) ? "" : aTexto(leerValor(encabezado.getCell(i)));
+            encontrados += (i == 0 ? "" : ", ") + texto;
+            if (!texto.equalsIgnoreCase(esperados[i])) {
+                coinciden = false;
+            }
+        }
+
+
+
+        String sobrante = (encabezado == null) ? "" : aTexto(leerValor(encabezado.getCell(esperados.length)));
+        if (!sobrante.isEmpty()) {
+            encontrados += ", " + sobrante + "...";
+            coinciden = false;
+        }
+
+        if (!coinciden) {
+            throw new IllegalStateException("La hoja '" + nombreHoja + "' de " + ruta.getFileName()
+                    + " no tiene las columnas que espera el programa.\n"
+                    + "   Esperadas:   " + String.join(", ", esperados) + "\n"
+                    + "   Encontradas: " + encontrados + "\n"
+                    + "   Corrija los encabezados (y mueva los datos) o borre la hoja para que se cree de nuevo.");
         }
     }
 
@@ -83,9 +116,8 @@ public class ExcelManager {
             }
             return filas;
 
-        }catch (Exception e) {
-            System.out.println(e.getMessage());
-            return null;
+        } catch (IOException e) {
+            throw errorDeArchivo("leer la hoja " + nombreHoja, e);
         }
     }
 
@@ -100,8 +132,8 @@ public class ExcelManager {
             escribirFila(libro, fila, valores);
             guardarLibro(libro);
 
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (IOException e) {
+            throw errorDeArchivo("guardar en la hoja " + nombreHoja, e);
         }
     }
 
@@ -116,12 +148,10 @@ public class ExcelManager {
             guardarLibro(libro);
             return true;
         } catch (IOException e) {
-            System.out.println(e.getMessage());
-            return false;
+            throw errorDeArchivo("actualizar la hoja " + nombreHoja, e);
         }
     }
 
-    /** Siguiente ID disponible: el mayor ID de la hoja + 1. */
     public int siguienteId(String nombreHoja) {
         Object[][] filas = leerFilas(nombreHoja);
         int maximo = 0;
@@ -188,8 +218,13 @@ public class ExcelManager {
             }
             guardarLibro(libro);
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            throw errorDeArchivo("crear el archivo", e);
         }
+    }
+
+    private RuntimeException errorDeArchivo(String accion, IOException causa) {
+        return new RuntimeException("No se pudo " + accion + " en " + ruta.getFileName()
+                + ". Verifique que el archivo no esté abierto en Excel.", causa);
     }
 
     private Sheet obtenerHoja(Workbook libro, String nombreHoja) {

@@ -54,16 +54,16 @@ public class MenuPrestamos {
                     default:
                         System.out.println("Opción inválida. Ingrese una nueva opción.");
                 }
-            } catch (RuntimeException e) {
-                consola.error(e.getMessage());
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } while (op != 5);
+        } while(op != 5);
     }
 
     private void anadirPrestamo() {
         boolean otra = true;
         int idFactura = prestamos.generarNuevoIdFactura();
-        while (otra) {
+        while(otra) {
             int idCliente = consola.leerEntero("Ingrese el ID del cliente:");
             String nombre = consola.leerTexto("Ingrese el nombre del cliente:");
             String contacto = consola.leerTexto("Ingrese el contacto (correo) del cliente:");
@@ -76,7 +76,6 @@ public class MenuPrestamos {
             System.out.println(ficha(nuevo));
             otra = consola.confirmar("\n¿Desea registrar otro producto?");
         }
-        imprimirFactura(idFactura);
     }
 
     private void imprimirFactura(int idFactura) {

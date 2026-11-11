@@ -65,7 +65,8 @@ public class VentasExcel {
 
     private Object[] aFila(Venta venta) {
         return new Object[]{
-                venta.getIdVenta(), venta.getFecha(), venta.getIdProducto(), venta.getCantidad(), venta.getValor(), venta.getTipo()
+                venta.getIdVenta(), venta.getIdFactura(), venta.getFecha(), venta.getIdProducto(),
+                venta.getCantidad(), venta.getValor(), venta.getTipo()
         };
     }
 
